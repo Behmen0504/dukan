@@ -1,0 +1,19 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/db_dukan
+    username: postgres
+    password: memmedov516
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  liquibase:
+    change-log: liquibase/changelog-master.yml
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+
