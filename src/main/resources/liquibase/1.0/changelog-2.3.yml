@@ -1,11 +1,11 @@
 
 databaseChangeLog:
   - changeSet:
-      id: Create News table
+      id: Create Recommends table
       author: Ramin Aliyev
       changes:
         - createTable:
-            tableName: news
+            tableName: recommends
             columns:
               - column:
                   name: id
@@ -16,13 +16,13 @@ databaseChangeLog:
                     nullable: false
                     remarks: id of news
               - column:
-                  name: title
+                  name: name
                   type: varchar(255)
               - column:
-                  name: image
+                  name: contacts_to_send
                   type: varchar(255)
               - column:
-                  name: description
+                  name: recommendation_message
                   type: text
               - column:
                   name: status

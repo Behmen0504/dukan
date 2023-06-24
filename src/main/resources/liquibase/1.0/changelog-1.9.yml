@@ -1,11 +1,11 @@
 
 databaseChangeLog:
   - changeSet:
-      id: Create Products table
+      id: Create Questions table
       author: Ramin Aliyev
       changes:
         - createTable:
-            tableName: products
+            tableName: questions
             columns:
               - column:
                   name: id
@@ -14,34 +14,10 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    remarks: id of lessons
+                    remarks: id of questions
               - column:
-                  name: name
-                  type: text
-              - column:
-                  name: status
+                  name: title
                   type: varchar(255)
-              - column:
-                  name: category_id
-                  type: bigint
-              - column:
-                  name: stock
-                  type: boolean
-                  defaultValue: true
-                  constraints:
-                    nullable: false
-              - column:
-                  name: stock_code
-                  type: varchar(255)
-              - column:
-                  name: description
-                  type: varchar(255)
-              - column:
-                  name: price
-                  type: double
-              - column:
-                  name: category
-                  type: bigint
               - column:
                   name: created_at
                   type: timestamp

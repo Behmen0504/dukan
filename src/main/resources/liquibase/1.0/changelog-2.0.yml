@@ -1,11 +1,11 @@
 
 databaseChangeLog:
   - changeSet:
-      id: Create Questions table
+      id: Create Slide_Images table
       author: Ramin Aliyev
       changes:
         - createTable:
-            tableName: questions
+            tableName: slide_images
             columns:
               - column:
                   name: id
@@ -14,9 +14,9 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    remarks: id of questions
+                    remarks: id of slide_images
               - column:
-                  name: title
+                  name: value
                   type: varchar(255)
               - column:
                   name: created_at

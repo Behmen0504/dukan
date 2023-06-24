@@ -13,7 +13,7 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    remarks: id of lessons
+                    remarks: id of products
               - column:
                   name: name
                   type: text

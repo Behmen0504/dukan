@@ -1,11 +1,11 @@
 
 databaseChangeLog:
   - changeSet:
-      id: Create Slide_Images table
+      id: Create Blogs table
       author: Ramin Aliyev
       changes:
         - createTable:
-            tableName: slide_images
+            tableName: blogs
             columns:
               - column:
                   name: id
@@ -14,10 +14,19 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    remarks: id of slide_images
+                    remarks: id of blogs
               - column:
-                  name: value
+                  name: title
                   type: varchar(255)
+              - column:
+                  name: image
+                  type: varchar(255)
+              - column:
+                  name: description
+                  type: text
+              - column:
+                  name: status
+                  type: varchar(32)
               - column:
                   name: created_at
                   type: timestamp
