@@ -1,10 +1,11 @@
+
 databaseChangeLog:
   - changeSet:
-      id: Create Categories table
+      id: Create Products table
       author: Ramin Aliyev
       changes:
         - createTable:
-            tableName: categories
+            tableName: products
             columns:
               - column:
                   name: id
@@ -13,21 +14,33 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    remarks: id of categories
+                    remarks: id of lessons
               - column:
                   name: name
-                  type: varchar(255)
-              - column:
-                  name: icon
-                  type: varchar(255)
-              - column:
-                  name: is_showing_home_page
-                  type: boolean
+                  type: text
               - column:
                   name: status
                   type: varchar(255)
               - column:
-                  name: sort
+                  name: category_id
+                  type: bigint
+              - column:
+                  name: stock
+                  type: boolean
+                  defaultValue: true
+                  constraints:
+                    nullable: false
+              - column:
+                  name: stock_code
+                  type: varchar(255)
+              - column:
+                  name: description
+                  type: varchar(255)
+              - column:
+                  name: price
+                  type: double
+              - column:
+                  name: category
                   type: bigint
               - column:
                   name: created_at
@@ -35,9 +48,6 @@ databaseChangeLog:
                   defaultValue: now()
                   constraints:
                     nullable: false
-              - column:
-                  name: fk_products
-                  type: bigint
               - column:
                   name: updated_at
                   type: timestamp

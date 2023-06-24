@@ -1,10 +1,11 @@
+
 databaseChangeLog:
   - changeSet:
-      id: Create Categories table
+      id: Create Orders table
       author: Ramin Aliyev
       changes:
         - createTable:
-            tableName: categories
+            tableName: orders
             columns:
               - column:
                   name: id
@@ -13,21 +14,21 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    remarks: id of categories
+                    remarks: id of orders
               - column:
-                  name: name
+                  name: tel
+                  type: varchar(128)
+              - column:
+                  name: address
                   type: varchar(255)
               - column:
-                  name: icon
-                  type: varchar(255)
+                  name: product_id
+                  type: bigint
               - column:
-                  name: is_showing_home_page
-                  type: boolean
+                  name: user_id
+                  type: bigint
               - column:
-                  name: status
-                  type: varchar(255)
-              - column:
-                  name: sort
+                  name: fk_order_details
                   type: bigint
               - column:
                   name: created_at
@@ -35,9 +36,6 @@ databaseChangeLog:
                   defaultValue: now()
                   constraints:
                     nullable: false
-              - column:
-                  name: fk_products
-                  type: bigint
               - column:
                   name: updated_at
                   type: timestamp

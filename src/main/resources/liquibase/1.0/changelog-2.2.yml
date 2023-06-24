@@ -1,10 +1,11 @@
+
 databaseChangeLog:
   - changeSet:
-      id: Create Categories table
+      id: Create Blogs table
       author: Ramin Aliyev
       changes:
         - createTable:
-            tableName: categories
+            tableName: blogs
             columns:
               - column:
                   name: id
@@ -13,31 +14,25 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    remarks: id of categories
+                    remarks: id of blogs
               - column:
-                  name: name
+                  name: title
                   type: varchar(255)
               - column:
-                  name: icon
+                  name: image
                   type: varchar(255)
               - column:
-                  name: is_showing_home_page
-                  type: boolean
+                  name: description
+                  type: text
               - column:
                   name: status
-                  type: varchar(255)
-              - column:
-                  name: sort
-                  type: bigint
+                  type: varchar(32)
               - column:
                   name: created_at
                   type: timestamp
                   defaultValue: now()
                   constraints:
                     nullable: false
-              - column:
-                  name: fk_products
-                  type: bigint
               - column:
                   name: updated_at
                   type: timestamp

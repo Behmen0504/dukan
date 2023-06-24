@@ -1,0 +1,73 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create Products table
+      author: Ramin Aliyev
+      changes:
+        - createTable:
+            tableName: products
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    remarks: id of lessons
+              - column:
+                  name: name
+                  type: text
+              - column:
+                  name: status
+                  type: varchar(255)
+              - column:
+                  name: category_id
+                  type: bigint
+              - column:
+                  name: stock
+                  type: boolean
+                  defaultValue: true
+                  constraints:
+                    nullable: false
+              - column:
+                  name: stock_code
+                  type: varchar(255)
+              - column:
+                  name: description
+                  type: varchar(255)
+              - column:
+                  name: price
+                  type: double
+              - column:
+                  name: category
+                  type: bigint
+              - column:
+                  name: fk_product_images
+                  type: bigint
+              - column:
+                  name: fk_orders
+                  type: bigint
+              - column:
+                  name: fk_order_details
+                  type: bigint
+              - column:
+                  name: fk_comments
+                  type: bigint
+              - column:
+                  name: fk_favorites
+                  type: bigint
+              - column:
+                  name: fk_recommends
+                  type: bigint
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValue: now()
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValue: now()
+                  constraints:
+                    nullable: false
