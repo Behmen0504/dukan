@@ -21,9 +21,6 @@ databaseChangeLog:
                   name: status
                   type: varchar(255)
               - column:
-                  name: category_id
-                  type: bigint
-              - column:
                   name: stock
                   type: boolean
                   defaultValue: true
@@ -39,26 +36,11 @@ databaseChangeLog:
                   name: price
                   type: double
               - column:
-                  name: category
+                  name: categories_id
                   type: bigint
-              - column:
-                  name: fk_product_images
-                  type: bigint
-              - column:
-                  name: fk_orders
-                  type: bigint
-              - column:
-                  name: fk_order_details
-                  type: bigint
-              - column:
-                  name: fk_comments
-                  type: bigint
-              - column:
-                  name: fk_favorites
-                  type: bigint
-              - column:
-                  name: fk_recommends
-                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_products_to_categories
+                    references: categories(id)
               - column:
                   name: created_at
                   type: timestamp

@@ -30,9 +30,15 @@ databaseChangeLog:
               - column:
                   name: user_id
                   type: bigint
+                  constraints:
+                    foreignKeyName: fk_comments_to_users
+                    references: users(id)
               - column:
                   name: product_id
                   type: bigint
+                  constraints:
+                    foreignKeyName: fk_comments_to_products
+                    references: products(id)
               - column:
                   name: created_at
                   type: timestamp

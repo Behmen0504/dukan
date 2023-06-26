@@ -24,9 +24,3 @@ databaseChangeLog:
                   defaultValue: now()
                   constraints:
                     nullable: false
-              - column:
-                  name: updated_at
-                  type: timestamp
-                  defaultValue: now()
-                  constraints:
-                    nullable: false

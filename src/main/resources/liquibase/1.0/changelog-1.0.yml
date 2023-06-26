@@ -37,9 +37,6 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: fk_products
-                  type: bigint
-              - column:
                   name: updated_at
                   type: timestamp
                   defaultValue: now()

@@ -34,15 +34,6 @@ databaseChangeLog:
                   name: gender
                   type: varchar(32)
               - column:
-                  name: fk_orders
-                  type: bigint
-              - column:
-                  name: fk_comments
-                  type: bigint
-              - column:
-                  name: fk_favorites
-                  type: bigint
-              - column:
                   name: created_at
                   type: timestamp
                   defaultValue: now()

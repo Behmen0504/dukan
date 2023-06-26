@@ -24,20 +24,17 @@ databaseChangeLog:
               - column:
                   name: product_id
                   type: bigint
+                  constraints:
+                    foreignKeyName: fk_orders_to_products
+                    references: products(id)
               - column:
                   name: user_id
                   type: bigint
-              - column:
-                  name: fk_order_details
-                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_orders_to_users
+                    references: users(id)
               - column:
                   name: created_at
-                  type: timestamp
-                  defaultValue: now()
-                  constraints:
-                    nullable: false
-              - column:
-                  name: updated_at
                   type: timestamp
                   defaultValue: now()
                   constraints:

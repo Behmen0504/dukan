@@ -14,13 +14,16 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    remarks: id of gift_codes
+                    remarks: id of product_images
               - column:
                   name: value
                   type: text
               - column:
-                  name: product_id
+                  name: products_id
                   type: bigint
+                  constraints:
+                    foreignKeyName: fk_products_images_to_products
+                    references: products(id)
               - column:
                   name: created_at
                   type: timestamp
