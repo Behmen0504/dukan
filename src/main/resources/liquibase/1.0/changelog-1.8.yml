@@ -1,0 +1,32 @@
+
+databaseChangeLog:
+  - changeSet:
+      id: Create Gift_Codes table
+      author: Ramin Aliyev
+      changes:
+        - createTable:
+            tableName: gift_codes
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    remarks: id of gift_codes
+              - column:
+                  name: code
+                  type: varchar(255)
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValue: now()
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValue: now()
+                  constraints:
+                    nullable: false

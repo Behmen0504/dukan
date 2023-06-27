@@ -1,0 +1,55 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create Products table
+      author: Ramin Aliyev
+      changes:
+        - createTable:
+            tableName: products
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    remarks: id of products
+              - column:
+                  name: name
+                  type: text
+              - column:
+                  name: status
+                  type: varchar(255)
+              - column:
+                  name: stock
+                  type: boolean
+                  defaultValue: true
+                  constraints:
+                    nullable: false
+              - column:
+                  name: stock_code
+                  type: varchar(255)
+              - column:
+                  name: description
+                  type: varchar(255)
+              - column:
+                  name: price
+                  type: double
+              - column:
+                  name: categories_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_products_to_categories
+                    references: categories(id)
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValue: now()
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValue: now()
+                  constraints:
+                    nullable: false

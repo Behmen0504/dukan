@@ -1,0 +1,38 @@
+
+databaseChangeLog:
+  - changeSet:
+      id: Create Product_Images table
+      author: Ramin Aliyev
+      changes:
+        - createTable:
+            tableName: product_images
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    remarks: id of product_images
+              - column:
+                  name: value
+                  type: text
+              - column:
+                  name: products_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_products_images_to_products
+                    references: products(id)
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValue: now()
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValue: now()
+                  constraints:
+                    nullable: false
