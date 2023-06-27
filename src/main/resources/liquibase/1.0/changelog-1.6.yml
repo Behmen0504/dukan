@@ -1,11 +1,11 @@
 
 databaseChangeLog:
   - changeSet:
-      id: Create Categories table
+      id: Create Favorites table
       author: Ramin Aliyev
       changes:
         - createTable:
-            tableName: categories
+            tableName: favorites
             columns:
               - column:
                   name: id
@@ -14,22 +14,28 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    remarks: id of categories
+                    remarks: id of favorites
               - column:
                   name: name
                   type: varchar(255)
               - column:
-                  name: icon
+                  name: image
                   type: varchar(255)
               - column:
-                  name: is_showing_home_page
-                  type: boolean
+                  name: price
+                  type: double
               - column:
-                  name: status
-                  type: varchar(255)
-              - column:
-                  name: sort
+                  name: user_id
                   type: bigint
+                  constraints:
+                    foreignKeyName: fk_favorites_to_users
+                    references: users(id)
+              - column:
+                  name: product_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_favorites_to_products
+                    references: products(id)
               - column:
                   name: created_at
                   type: timestamp

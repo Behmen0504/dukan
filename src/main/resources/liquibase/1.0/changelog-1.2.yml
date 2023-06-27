@@ -1,11 +1,11 @@
 
 databaseChangeLog:
   - changeSet:
-      id: Create Categories table
+      id: Create Product_Images table
       author: Ramin Aliyev
       changes:
         - createTable:
-            tableName: categories
+            tableName: product_images
             columns:
               - column:
                   name: id
@@ -14,22 +14,16 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    remarks: id of categories
+                    remarks: id of product_images
               - column:
-                  name: name
-                  type: varchar(255)
+                  name: value
+                  type: text
               - column:
-                  name: icon
-                  type: varchar(255)
-              - column:
-                  name: is_showing_home_page
-                  type: boolean
-              - column:
-                  name: status
-                  type: varchar(255)
-              - column:
-                  name: sort
+                  name: products_id
                   type: bigint
+                  constraints:
+                    foreignKeyName: fk_products_images_to_products
+                    references: products(id)
               - column:
                   name: created_at
                   type: timestamp

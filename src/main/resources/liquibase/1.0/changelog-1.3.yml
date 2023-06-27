@@ -1,11 +1,11 @@
 
 databaseChangeLog:
   - changeSet:
-      id: Create Categories table
+      id: Create Users table
       author: Ramin Aliyev
       changes:
         - createTable:
-            tableName: categories
+            tableName: users
             columns:
               - column:
                   name: id
@@ -14,22 +14,25 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    remarks: id of categories
+                    remarks: id of users
               - column:
                   name: name
                   type: varchar(255)
               - column:
-                  name: icon
+                  name: surname
                   type: varchar(255)
               - column:
-                  name: is_showing_home_page
-                  type: boolean
-              - column:
-                  name: status
+                  name: email
                   type: varchar(255)
               - column:
-                  name: sort
-                  type: bigint
+                  name: tel
+                  type: varchar(128)
+              - column:
+                  name: password
+                  type: varchar(255)
+              - column:
+                  name: gender
+                  type: varchar(32)
               - column:
                   name: created_at
                   type: timestamp

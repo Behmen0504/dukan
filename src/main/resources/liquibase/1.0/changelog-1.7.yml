@@ -1,11 +1,11 @@
 
 databaseChangeLog:
   - changeSet:
-      id: Create Categories table
+      id: Create Comments table
       author: Ramin Aliyev
       changes:
         - createTable:
-            tableName: categories
+            tableName: comments
             columns:
               - column:
                   name: id
@@ -14,22 +14,31 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    remarks: id of categories
+                    remarks: id of comments
               - column:
-                  name: name
-                  type: varchar(255)
+                  name: message
+                  type: text
               - column:
-                  name: icon
-                  type: varchar(255)
-              - column:
-                  name: is_showing_home_page
-                  type: boolean
-              - column:
-                  name: status
-                  type: varchar(255)
-              - column:
-                  name: sort
+                  name: product_rate
                   type: bigint
+              - column:
+                  name: anonymous_comment
+                  type: boolean
+                  defaultValue: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_comments_to_users
+                    references: users(id)
+              - column:
+                  name: product_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_comments_to_products
+                    references: products(id)
               - column:
                   name: created_at
                   type: timestamp
