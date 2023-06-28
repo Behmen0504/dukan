@@ -1,4 +1,4 @@
-package com.dukan.dukan;
+package com.dukan;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
