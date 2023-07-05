@@ -1,6 +1,7 @@
 package com.dukan.dao.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.dukan.myenums.Status;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -8,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,24 +17,22 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "favorites")
-public class Favorites {
+@Table(name = "categories")
+public class CategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String name;
-    String image;
-    Double price;
+    String icon;
+    Boolean isShowingHomePage;
+    @Enumerated(EnumType.STRING)
+    Status status;
+    Integer sort;
     @CreationTimestamp
     LocalDateTime createdAt;
     @UpdateTimestamp
     LocalDateTime updatedAt;
-    @JsonManagedReference
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_id")
-    Products product;
-    @JsonManagedReference
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    Users user;
+    @JsonBackReference
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+    List<ProductEntity> products;
 }

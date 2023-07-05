@@ -1,5 +1,6 @@
 package com.dukan.dao.entity;
 
+import com.dukan.myenums.Status;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -18,12 +19,14 @@ import java.util.List;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "products")
-public class Products {
+public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String name;
-    String status;
+
+    @Enumerated(EnumType.STRING)
+    Status status;
     Boolean stock = true;
     String stockCode;
     String Description;
@@ -33,18 +36,25 @@ public class Products {
     LocalDateTime createdAt;
     @UpdateTimestamp
     LocalDateTime updateAt;
+
     @JsonManagedReference
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
-    Categories category;
+    CategoryEntity category;
 
     @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "products")
-    List<ProductImages> productImages;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    List<ProductImageEntity> productImages;
 
     @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
-    List<Favorites> favorites;
+    List<FavoriteEntity> favorites;
 
+    @JsonBackReference
+    @ManyToOne(cascade = CascadeType.ALL)
+    OrderEntity order;
 
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "product")
+    List<CommentEntity> comments;
 }
