@@ -47,12 +47,12 @@ public class ProductEntity {
     List<ProductImageEntity> productImages;
 
     @JsonBackReference
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    @OneToMany(mappedBy = "product")
     List<FavoriteEntity> favorites;
 
     @JsonBackReference
-    @ManyToOne(cascade = CascadeType.ALL)
-    OrderEntity order;
+    @OneToMany(mappedBy = "productOrd")
+    List<OrderEntity> orders;
 
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "product")

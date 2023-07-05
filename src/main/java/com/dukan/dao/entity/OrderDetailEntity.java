@@ -27,7 +27,7 @@ public class OrderDetailEntity {
     @JsonBackReference
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
-    OrderEntity order;
+    OrderEntity orderr;
 
     @JsonManagedReference
     @ManyToOne(cascade = CascadeType.ALL)

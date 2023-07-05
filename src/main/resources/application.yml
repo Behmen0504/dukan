@@ -3,16 +3,21 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/postgres
+    #    url: jdbc:postgresql://localhost:5432/springbootrelationwithliquibase?currentSchema=testliquibase
+    url: jdbc:postgresql://localhost:5432/db_dukan
     username: postgres
-    password: ramin2004
+    password: memmedov516
   jpa:
     hibernate:
       ddl-auto: none
     show-sql: true
   liquibase:
     change-log: liquibase/changelog-master.yml
+  #    default-schema: testliquibase
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+
+
+
 

@@ -28,9 +28,9 @@ public class OrderEntity {
 
 
     @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "order")
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
-    List<ProductEntity> products;
+    ProductEntity productOrd;
 
     @JsonManagedReference
     @ManyToOne(cascade = CascadeType.ALL)
@@ -38,7 +38,7 @@ public class OrderEntity {
     UserEntity user;
 
     @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "order")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "orderr")
     List<OrderDetailEntity> orderDetails;
 
 
