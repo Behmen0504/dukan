@@ -1,4 +1,4 @@
-package com.dukan.dukan;
+package com.dukan;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

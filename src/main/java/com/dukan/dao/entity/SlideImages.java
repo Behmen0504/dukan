@@ -1,4 +1,4 @@
-package com.dukan.dukan.dao.entity;
+package com.dukan.dao.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
