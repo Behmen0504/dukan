@@ -27,8 +27,6 @@ public class NewsEntity {
     @Enumerated(EnumType.STRING)
     Status status;
 
-    int viewCount;
-
     @CreationTimestamp
     LocalDateTime createdAt;
     @UpdateTimestamp
