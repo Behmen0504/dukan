@@ -16,7 +16,7 @@ databaseChangeLog:
                     nullable: false
                     remarks: id of orders
               - column:
-                  name: tel
+                  name: phone_number
                   type: varchar(128)
               - column:
                   name: address

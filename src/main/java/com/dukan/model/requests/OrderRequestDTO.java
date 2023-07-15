@@ -1,4 +1,4 @@
-package com.dukan.model;
+package com.dukan.model.requests;
 
 import com.dukan.dao.entity.OrderDetailEntity;
 import com.dukan.dao.entity.ProductEntity;
@@ -13,14 +13,12 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class OrderDTO {
+public class OrderRequestDTO {
     Long id;
 
     String phoneNumber;
 
-    ProductEntity productOrd;
+    Long productId;
 
-    UserEntity user;
-
-    List<OrderDetailDTO> orderDetails;
+    Long userId;
 }

@@ -27,10 +27,11 @@ dependencies {
 	runtimeOnly("org.postgresql:postgresql")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+
 	//mapper
-	implementation("org.mapstruct:mapstruct-jdk8:1.5.3.Final")
+	implementation("org.mapstruct:mapstruct-jdk8:1.3.0.Final")
 	annotationProcessor("org.mapstruct:mapstruct-jdk8:1.5.3.Final")
-	annotationProcessor("org.mapstruct:mapstruct-processor:1.5.3.Final")
+	annotationProcessor("org.mapstruct:mapstruct-processor:1.3.0.Final")
 }
 
 tasks.withType<Test> {

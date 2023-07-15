@@ -4,7 +4,6 @@ import com.dukan.myenums.Status;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -16,4 +15,5 @@ public class NewsDTO {
     String title;
     String image;
     String description;
+    Status status = Status.ENABLE;
 }
