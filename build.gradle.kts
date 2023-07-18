@@ -34,6 +34,8 @@ dependencies {
 	implementation("org.mapstruct:mapstruct-jdk8:1.3.0.Final")
 	annotationProcessor("org.mapstruct:mapstruct-jdk8:1.3.0.Final")
 	annotationProcessor("org.mapstruct:mapstruct-processor:1.3.0.Final")
+	implementation("org.slf4j:slf4j-api:2.0.7")
+
 }
 
 tasks.withType<Test> {
