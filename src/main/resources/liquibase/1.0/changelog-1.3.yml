@@ -25,13 +25,16 @@ databaseChangeLog:
                   name: email
                   type: varchar(255)
               - column:
-                  name: tel
+                  name: phone_number
                   type: varchar(128)
               - column:
                   name: password
                   type: varchar(255)
               - column:
                   name: gender
+                  type: varchar(32)
+              - column:
+                  name: address
                   type: varchar(32)
               - column:
                   name: created_at

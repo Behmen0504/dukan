@@ -1,12 +1,8 @@
 package com.dukan.model.requests;
 
-import com.dukan.dao.entity.OrderDetailEntity;
-import com.dukan.dao.entity.ProductEntity;
-import com.dukan.dao.entity.UserEntity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -17,6 +13,8 @@ public class OrderRequestDTO {
     Long id;
 
     String phoneNumber;
+
+    String address;
 
     Long productId;
 

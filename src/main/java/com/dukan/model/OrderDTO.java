@@ -17,6 +17,7 @@ public class OrderDTO {
     Long id;
 
     String phoneNumber;
+    String address;
 
     ProductEntity productOrd;
 

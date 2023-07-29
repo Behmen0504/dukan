@@ -29,6 +29,6 @@ public class ProductImageEntity {
 
     @JsonBackReference
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "_id")
+    @JoinColumn(name = "product_id")
     ProductEntity product;
 }

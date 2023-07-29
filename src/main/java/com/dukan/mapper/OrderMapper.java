@@ -21,7 +21,7 @@ public abstract class OrderMapper {
     public abstract OrderEntity mapDtoToEntity(OrderDTO orderDTO);
 
     @Mappings({
-            @Mapping(source = "requestDto.productId", target = "productOrd", qualifiedByName = "createProductEntity"),
+            @Mapping(source = "requestDto.productId", target = "product", qualifiedByName = "createProductEntity"),
             @Mapping(source = "requestDto.userId", target = "user", qualifiedByName = "createUserEntity")
 
     })

@@ -28,6 +28,12 @@ databaseChangeLog:
                     foreignKeyName: fk_order_details_to_orders
                     references: orders(id)
               - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_order_details_to_users
+                    references: users(id)
+              - column:
                   name: product_id
                   type: bigint
                   constraints:
