@@ -18,7 +18,6 @@ public abstract class OrderMapper {
     public static final OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
 
     public abstract OrderDTO mapEntityToDto(OrderEntity orderEntity);
-    public abstract OrderEntity mapDtoToEntity(OrderDTO orderDTO);
 
     @Mappings({
             @Mapping(source = "requestDto.productId", target = "product", qualifiedByName = "createProductEntity"),

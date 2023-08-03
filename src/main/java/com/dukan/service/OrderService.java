@@ -18,11 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
-    private final ProductRepository productRepository;
-    /*public OrderService(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
-    }
-*/
+
     public List<OrderDTO> getOrders() {
         log.info("ActionLog.getOrder start");
         List<OrderDTO> orderDTOS = OrderMapper.INSTANCE.mapEntitiesToDtos(orderRepository.findAll());

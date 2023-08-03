@@ -19,7 +19,7 @@ databaseChangeLog:
                   name: value
                   type: text
               - column:
-                  name: products_id
+                  name: product_id
                   type: bigint
                   constraints:
                     foreignKeyName: fk_products_images_to_products

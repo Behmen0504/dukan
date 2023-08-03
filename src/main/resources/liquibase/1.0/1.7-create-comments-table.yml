@@ -25,8 +25,6 @@ databaseChangeLog:
                   name: anonymous_comment
                   type: boolean
                   defaultValue: false
-                  constraints:
-                    nullable: false
               - column:
                   name: user_id
                   type: bigint

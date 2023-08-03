@@ -1,10 +1,8 @@
 package com.dukan.mapper;
 
-import com.dukan.dao.entity.OrderEntity;
-import com.dukan.dao.entity.ProductEntity;
-import com.dukan.dao.entity.UserEntity;
-import com.dukan.model.OrderDTO;
-import com.dukan.model.requests.OrderRequestDTO;
+import com.dukan.dao.entity.*;
+import com.dukan.model.ProductDTO;
+import com.dukan.model.requests.ProductRequestDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -17,24 +15,27 @@ import java.util.stream.Collectors;
 public abstract class ProductMapper {
     public static final ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
 
-    public abstract OrderDTO mapEntityToDto(OrderEntity orderEntity);
-    public abstract OrderEntity mapDtoToEntity(OrderDTO orderDTO);
+    public abstract ProductDTO mapEntityToDto(ProductEntity productEntity);
+    public abstract ProductEntity mapDtoToEntity(ProductDTO productDTO);
 
     @Mappings({
-            @Mapping(source = "requestDto.productId", target = "product", qualifiedByName = "createProductEntity"),
-            @Mapping(source = "requestDto.userId", target = "user", qualifiedByName = "createUserEntity")
-
+            @Mapping(source = "requestDto.productImageIds", target = "productImages", qualifiedByName = "createProductImageEntity"),
+            @Mapping(source = "requestDto.favoriteIds", target = "favorites", qualifiedByName = "createFavoriteEntity"),
+            @Mapping(source = "requestDto.categoryId", target = "category", qualifiedByName = "createCategoryEntity"),
     })
-    public abstract OrderEntity mapOrderRequestDtoToEntity(OrderRequestDTO requestDto);
+    public abstract ProductEntity mapProductRequestDtoToEntity(ProductRequestDTO requestDto);
 
-    protected ProductEntity createProductEntity(Long id) {
-        return ProductEntity.builder().id(id).build();
+    protected List<ProductImageEntity> createProductImageEntity(List<Long> ids) {
+        return ids.stream().map(id -> ProductImageEntity.builder().id(id).build()).collect(Collectors.toList());
     }
-    protected UserEntity createUserEntity(Long id) {
-        return UserEntity.builder().id(id).build();
+    protected List<FavoriteEntity> createFavoriteEntity(List<Long> ids) {
+        return ids.stream().map(id -> FavoriteEntity.builder().id(id).build()).collect(Collectors.toList());
+    }
+    protected CategoryEntity createCategoryEntity(Long id) {
+        return CategoryEntity.builder().id(id).build();
     }
 
-    public List<OrderDTO> mapEntitiesToDtos(List<OrderEntity> orderEntities){
-        return orderEntities.stream().map(this::mapEntityToDto).collect(Collectors.toList());
+    public List<ProductDTO> mapEntitiesToDtos(List<ProductEntity> productEntities){
+        return productEntities.stream().map(this::mapEntityToDto).collect(Collectors.toList());
     }
 }
