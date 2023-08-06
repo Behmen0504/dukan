@@ -1,6 +1,7 @@
 package com.dukan.controller;
 
 import com.dukan.model.NewsDTO;
+import com.dukan.model.requests.NewsRequestDTO;
 import com.dukan.service.NewsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -29,13 +30,13 @@ public class NewsController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public void addNews(@RequestBody NewsDTO newsDTO){
-        newsService.addNews(newsDTO);
+    public void addNews(@RequestBody NewsRequestDTO requestDTO){
+        newsService.addNews(requestDTO);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void updateNews(@PathVariable Long id,@RequestBody NewsDTO newsDTO){
-        newsService.updateNews(id,newsDTO);
+    public void updateNews(@PathVariable Long id,@RequestBody NewsRequestDTO requestDTO){
+        newsService.updateNews(id,requestDTO);
     }
 }

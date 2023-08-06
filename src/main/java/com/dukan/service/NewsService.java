@@ -4,6 +4,7 @@ import com.dukan.dao.entity.NewsEntity;
 import com.dukan.dao.repository.NewsRepository;
 import com.dukan.mapper.NewsMapper;
 import com.dukan.model.NewsDTO;
+import com.dukan.model.requests.NewsRequestDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -31,19 +32,19 @@ public class NewsService {
         log.info("ActionLog.getNews end");
         return newsDTO;
     }
-    public void addNews(NewsDTO newsDTO) {
+    public void addNews(NewsRequestDTO requestDTO) {
         log.info("ActionLog.addNews start");
-        newsRepository.save(NewsMapper.INSTANCE.mapDtoToEntity(newsDTO));
+        newsRepository.save(NewsMapper.INSTANCE.mapDtoToEntity(requestDTO));
         log.info("ActionLog.addNews end");
     }
 
-    public void updateNews(Long id, NewsDTO newsDTO) {
+    public void updateNews(Long id, NewsRequestDTO requestDTO) {
         log.info("ActionLog.updateNews start");
         NewsEntity newsEntity = newsRepository.findById(id).get();
-        newsEntity.setTitle(newsDTO.getTitle());
-        newsEntity.setImage(newsDTO.getImage());
-        newsEntity.setStatus(newsDTO.getStatus());
-        newsEntity.setDescription(newsDTO.getDescription());
+        newsEntity.setTitle(requestDTO.getTitle());
+        newsEntity.setImage(requestDTO.getImage());
+        newsEntity.setStatus(requestDTO.getStatus());
+        newsEntity.setDescription(requestDTO.getDescription());
         newsRepository.save(newsEntity);
         log.info("ActionLog.updateNews end");
     }

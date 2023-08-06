@@ -9,8 +9,6 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class BlogRequestDTO {
-    String title;
-    String image;
-    String description;
+public class GiftCodeRequestDTO {
+    String code;
 }

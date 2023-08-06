@@ -13,7 +13,6 @@ import java.util.List;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductRequestDTO {
-    Long id;
     String name;
 
     Status status = Status.ENABLE;
