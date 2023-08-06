@@ -1,6 +1,7 @@
 package com.dukan.dao.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -30,7 +31,7 @@ public class CommentEntity {
     @JoinColumn(name = "product_id")
     ProductEntity product;
 
-    @JsonBackReference
+    @JsonManagedReference
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     UserEntity user;

@@ -20,9 +20,9 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     public List<OrderDTO> getOrders() {
-        log.info("ActionLog.getOrder start");
+        log.info("ActionLog.getOrders start");
         List<OrderDTO> orderDTOS = OrderMapper.INSTANCE.mapEntitiesToDtos(orderRepository.findAll());
-        log.info("ActionLog.getOrder end");
+        log.info("ActionLog.getOrders end");
         return orderDTOS;
     }
 
