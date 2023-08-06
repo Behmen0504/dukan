@@ -39,7 +39,7 @@ public class OrderService {
         log.info("ActionLog.addOrder end");
     }
 
-    public void updateOrder(Long id, OrderDTO orderDTO) {
+    public void updateOrder(Long id, OrderRequestDTO requestDTO) {
         log.info("ActionLog.updateOrder start");
         OrderEntity orderEntity = orderRepository.findById(id).get();
 //        newsRepository.save(newsEntity);

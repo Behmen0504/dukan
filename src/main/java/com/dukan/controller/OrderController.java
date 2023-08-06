@@ -36,7 +36,7 @@ public class OrderController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void updateOrder(@PathVariable Long id,@RequestBody OrderDTO orderDTO){
-        orderService.updateOrder(id,orderDTO);
+    public void updateOrder(@PathVariable Long id,@RequestBody OrderRequestDTO orderRequestDTO){
+        orderService.updateOrder(id,orderRequestDTO);
     }
 }
