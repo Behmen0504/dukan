@@ -16,5 +16,5 @@ databaseChangeLog:
                     nullable: false
                     remarks: id of slide_images
               - column:
-                  name: value
+                  name: image
                   type: varchar(255)

@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductImageDTO {
     Long id;
-    String value;
+    String image;
     ProductEntity product;
 
 }

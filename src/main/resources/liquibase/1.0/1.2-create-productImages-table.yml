@@ -16,7 +16,7 @@ databaseChangeLog:
                     nullable: false
                     remarks: id of product_images
               - column:
-                  name: value
+                  name: image
                   type: text
               - column:
                   name: product_id

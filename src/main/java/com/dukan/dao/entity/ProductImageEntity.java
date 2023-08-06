@@ -21,7 +21,7 @@ public class ProductImageEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String value;
+    String image;
     @CreationTimestamp
     LocalDateTime createdAt;
     @UpdateTimestamp
