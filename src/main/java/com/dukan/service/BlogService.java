@@ -4,6 +4,7 @@ import com.dukan.dao.entity.BlogEntity;
 import com.dukan.dao.repository.BlogRepository;
 import com.dukan.mapper.BlogMapper;
 import com.dukan.model.BlogDTO;
+import com.dukan.model.exception.NotFoundException;
 import com.dukan.model.requests.BlogRequestDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,5 +43,16 @@ public class BlogService {
         BlogEntity blogEntity = blogRepository.findById(id).get();
 //        newsRepository.save(newsEntity);
         log.info("ActionLog.updateBlog end");
+    }
+
+    public void deleteBlog(Long id) {
+        log.info("ActionLog.deleteBlog start");
+        blogRepository.findById(id).orElseThrow(
+                () -> {
+                    log.error("ActionLog.DeleteBlog.error blog not found with id: {}", id);
+                    throw new NotFoundException("BLOG_NOT_FOUND");
+                }
+        );
+        blogRepository.deleteById(id);
     }
 }

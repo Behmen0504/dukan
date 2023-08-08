@@ -24,7 +24,7 @@ public class OrderEntity {
 
 
     @JsonManagedReference
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     ProductEntity product;
 

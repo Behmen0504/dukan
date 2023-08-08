@@ -22,6 +22,7 @@ public class BlogController {
     public List<BlogDTO> getBlogs(){
         return blogService.getBlogs();
     }
+
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public BlogDTO getBlog(@PathVariable Long id){
@@ -39,4 +40,11 @@ public class BlogController {
     public void updateBlog(@PathVariable Long id,@RequestBody BlogRequestDTO requestDTO){
         blogService.updateBlog(id,requestDTO);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteBlog(@PathVariable Long id){
+        blogService.deleteBlog(id);
+    }
+
 }
