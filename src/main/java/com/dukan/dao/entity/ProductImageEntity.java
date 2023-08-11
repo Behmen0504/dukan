@@ -28,7 +28,7 @@ public class ProductImageEntity {
     LocalDateTime updatedAt;
 
     @JsonBackReference
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "product_id")
     ProductEntity product;
 }

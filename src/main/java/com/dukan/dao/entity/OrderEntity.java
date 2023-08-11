@@ -24,12 +24,12 @@ public class OrderEntity {
 
 
     @JsonManagedReference
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "product_id")
     ProductEntity product;
 
     @JsonManagedReference
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "user_id")
     UserEntity user;
 

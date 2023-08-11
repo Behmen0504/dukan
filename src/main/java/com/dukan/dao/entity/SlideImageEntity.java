@@ -16,5 +16,5 @@ public class SlideImageEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    String value;
+    String image;
 }

@@ -10,9 +10,6 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class FavoriteRequestDTO {
-    String name;
-    String image;
-    Double price;
     Long productId;
     Long userId;
 }

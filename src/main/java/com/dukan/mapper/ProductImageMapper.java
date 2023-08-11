@@ -28,6 +28,7 @@ public abstract class ProductImageMapper {
 
 
     protected ProductEntity createProductEntity(Long id) {
+        if(id == null) return null;
         return ProductEntity.builder().id(id).build();
     }
 

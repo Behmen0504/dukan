@@ -4,6 +4,7 @@ import com.dukan.dao.entity.ProductEntity;
 import com.dukan.dao.repository.ProductRepository;
 import com.dukan.mapper.ProductMapper;
 import com.dukan.model.ProductDTO;
+import com.dukan.model.exception.NotFoundException;
 import com.dukan.model.requests.ProductRequestDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,5 +43,16 @@ public class ProductService {
         ProductEntity productEntity = productRepository.findById(id).get();
 //        newsRepository.save(newsEntity);
         log.info("ActionLog.updateProduct end");
+    }
+    public void deleteProduct(Long id) {
+        log.info("ActionLog.deleteProduct start");
+        productRepository.findById(id).orElseThrow(
+                () -> {
+                    log.error("ActionLog.deleteProduct.error product not found with id: {}", id);
+                    throw new NotFoundException("PRODUCT_NOT_FOUND");
+                }
+        );
+        log.info("ActionLog.deleteProduct end");
+        productRepository.deleteById(id);
     }
 }

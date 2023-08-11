@@ -9,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,14 +28,23 @@ public class CommentEntity {
     boolean anonymousComment;
 
     @JsonBackReference
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "product_id")
     ProductEntity product;
 
     @JsonManagedReference
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "user_id")
     UserEntity user;
+
+    @JsonManagedReference
+    @OneToMany(cascade = {CascadeType.MERGE})
+    List<CommentEntity> commentEntities;
+
+    @JsonBackReference
+    @ManyToOne(cascade = {CascadeType.MERGE})
+    @JoinColumn(name = "comment_id")
+    CommentEntity comment;
 
     @CreationTimestamp
     LocalDateTime createdAt;

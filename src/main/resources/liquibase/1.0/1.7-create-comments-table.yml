@@ -38,6 +38,12 @@ databaseChangeLog:
                     foreignKeyName: fk_comments_to_products
                     references: products(id)
               - column:
+                  name: comment_id
+                  type: bigint
+                  constraints:
+                      foreignKeyName: fk_comments_to_comments
+                      references: comments(id)
+              - column:
                   name: created_at
                   type: timestamp
                   defaultValue: now()

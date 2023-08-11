@@ -25,6 +25,7 @@ public abstract class ProductMapper {
     public abstract ProductEntity mapProductRequestDtoToEntity(ProductRequestDTO requestDto);
 
     protected CategoryEntity createCategoryEntity(Long id) {
+        if(id == null) return null;
         return CategoryEntity.builder().id(id).build();
     }
 

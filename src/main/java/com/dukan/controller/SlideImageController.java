@@ -33,10 +33,15 @@ public class SlideImageController {
     public void addSlideImage(@RequestBody SlideImageRequestDTO requestDTO){
         slideImageService.addSlideImage(requestDTO);
     }
-
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void updateSlideImage(@PathVariable Long id,@RequestBody SlideImageRequestDTO requestDTO){
         slideImageService.updateSlideImage(id,requestDTO);
     }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteSlideImage(@PathVariable Long id){
+        slideImageService.deleteSlideImage(id);
+    }
+
 }

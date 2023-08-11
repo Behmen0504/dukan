@@ -53,6 +53,7 @@ public class BlogService {
                     throw new NotFoundException("BLOG_NOT_FOUND");
                 }
         );
+        log.info("ActionLog.deleteBlog end");
         blogRepository.deleteById(id);
     }
 }

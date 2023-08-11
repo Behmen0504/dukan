@@ -39,4 +39,10 @@ public class GiftCodeController {
     public void updateGiftCode(@PathVariable Long id,@RequestBody GiftCodeDTO giftCodeDTO){
         giftCodeService.updateGiftCode(id,giftCodeDTO);
     }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteGiftCode(@PathVariable Long id){
+        giftCodeService.deleteGiftCode(id);
+    }
+
 }

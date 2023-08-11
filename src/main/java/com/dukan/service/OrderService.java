@@ -6,6 +6,7 @@ import com.dukan.dao.repository.ProductRepository;
 import com.dukan.dao.repository.UserRepository;
 import com.dukan.mapper.OrderMapper;
 import com.dukan.model.OrderDTO;
+import com.dukan.model.exception.NotFoundException;
 import com.dukan.model.requests.OrderRequestDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -44,5 +45,16 @@ public class OrderService {
         OrderEntity orderEntity = orderRepository.findById(id).get();
 //        newsRepository.save(newsEntity);
         log.info("ActionLog.updateOrder end");
+    }
+    public void deleteOrder(Long id) {
+        log.info("ActionLog.deleteOrder start");
+        orderRepository.findById(id).orElseThrow(
+                () -> {
+                    log.error("ActionLog.deleteOrder.error order not found with id: {}", id);
+                    throw new NotFoundException("ORDER_NOT_FOUND");
+                }
+        );
+        log.info("ActionLog.deleteOrder end");
+        orderRepository.deleteById(id);
     }
 }

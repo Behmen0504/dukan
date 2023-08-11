@@ -19,4 +19,6 @@ public class CommentRequestDTO {
     Long productId;
 
     Long userId;
+
+    Long commentId;
 }

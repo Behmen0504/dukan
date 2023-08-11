@@ -20,6 +20,6 @@ import java.time.LocalDateTime;
 public class ProductImageDTO {
     Long id;
     String image;
-    ProductEntity product;
+    ProductDTO product;
 
 }

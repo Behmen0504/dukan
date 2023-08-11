@@ -4,8 +4,6 @@ import com.dukan.myenums.Status;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.List;
-
 
 @Data
 @NoArgsConstructor
@@ -18,7 +16,7 @@ public class ProductRequestDTO {
     Status status = Status.ENABLE;
     Boolean stock = true;
     String stockCode;
-    String Description;
+    String description;
     Double price;
     Integer sort;
     Long categoryId;

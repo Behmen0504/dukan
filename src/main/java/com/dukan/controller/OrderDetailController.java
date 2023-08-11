@@ -39,4 +39,11 @@ public class OrderDetailController {
     public void updateOrderDetail(@PathVariable Long id,@RequestBody OrderDetailRequestDTO orderDetailRequestDTO){
         orderDetailService.updateOrderDetail(id,orderDetailRequestDTO);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteOrderDetail(@PathVariable Long id){
+        orderDetailService.deleteOrderDetail(id);
+    }
+
 }

@@ -4,6 +4,7 @@ import com.dukan.dao.entity.UserEntity;
 import com.dukan.dao.repository.UserRepository;
 import com.dukan.mapper.UserMapper;
 import com.dukan.model.UserDTO;
+import com.dukan.model.exception.NotFoundException;
 import com.dukan.model.requests.UserRequestDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,5 +43,16 @@ public class UserService {
         UserEntity userEntity = userRepository.findById(id).get();
 //        newsRepository.save(userEntity);
         log.info("ActionLog.updateUser end");
+    }
+    public void deleteUser(Long id) {
+        log.info("ActionLog.deleteUser start");
+        userRepository.findById(id).orElseThrow(
+                () -> {
+                    log.error("ActionLog.deleteUser.error user not found with id: {}", id);
+                    throw new NotFoundException("USER_NOT_FOUND");
+                }
+        );
+        log.info("ActionLog.deleteUser end");
+        userRepository.deleteById(id);
     }
 }

@@ -40,4 +40,10 @@ public class FavoriteController {
     public void updateFavorite(@PathVariable Long id,@RequestBody FavoriteDTO favoriteDTO){
         favoriteService.updateFavorite(id,favoriteDTO);
     }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteFavorite(@PathVariable Long id){
+        favoriteService.deleteFavorite(id);
+    }
+
 }

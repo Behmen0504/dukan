@@ -27,9 +27,11 @@ public abstract class OrderMapper {
     public abstract OrderEntity mapOrderRequestDtoToEntity(OrderRequestDTO requestDto);
 
     protected ProductEntity createProductEntity(Long id) {
+        if(id == null) return null;
         return ProductEntity.builder().id(id).build();
     }
     protected UserEntity createUserEntity(Long id) {
+        if(id == null) return null;
         return UserEntity.builder().id(id).build();
     }
 

@@ -33,10 +33,15 @@ public class ProductImageController {
     public void addProductImage(@RequestBody ProductImageRequestDTO requestDTO){
         productImageService.addProductImage(requestDTO);
     }
-
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void updateProductImage(@PathVariable Long id,@RequestBody ProductImageRequestDTO requestDTO){
         productImageService.updateProductImage(id,requestDTO);
     }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteProductImage(@PathVariable Long id){
+        productImageService.deleteProductImage(id);
+    }
+
 }

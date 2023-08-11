@@ -4,6 +4,7 @@ import com.dukan.dao.entity.CategoryEntity;
 import com.dukan.dao.repository.CategoryRepository;
 import com.dukan.mapper.CategoryMapper;
 import com.dukan.model.CategoryDTO;
+import com.dukan.model.exception.NotFoundException;
 import com.dukan.model.requests.CategoryRequestDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,5 +43,16 @@ public class CategoryService {
         CategoryEntity categoryEntity = categoryRepository.findById(id).get();
 //        categoryRepository.save(categoryEntity);
         log.info("ActionLog.updateCategory end");
+    }
+    public void deleteCategory(Long id) {
+        log.info("ActionLog.deleteCategory start");
+        categoryRepository.findById(id).orElseThrow(
+                () -> {
+                    log.error("ActionLog.deleteCategory.error category not found with id: {}", id);
+                    throw new NotFoundException("CATEGORY_NOT_FOUND");
+                }
+        );
+        log.info("ActionLog.deleteCategory end");
+        categoryRepository.deleteById(id);
     }
 }

@@ -39,4 +39,10 @@ public class NewsController {
     public void updateNews(@PathVariable Long id,@RequestBody NewsRequestDTO requestDTO){
         newsService.updateNews(id,requestDTO);
     }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteNews(@PathVariable Long id){
+        newsService.deleteNews(id);
+    }
+
 }

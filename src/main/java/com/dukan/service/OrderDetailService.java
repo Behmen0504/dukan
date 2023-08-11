@@ -4,6 +4,7 @@ import com.dukan.dao.entity.OrderDetailEntity;
 import com.dukan.dao.repository.OrderDetailRepository;
 import com.dukan.mapper.OrderDetailMapper;
 import com.dukan.model.OrderDetailDTO;
+import com.dukan.model.exception.NotFoundException;
 import com.dukan.model.requests.OrderDetailRequestDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,5 +43,16 @@ public class OrderDetailService {
         OrderDetailEntity orderDetailEntity = orderDetailRepository.findById(id).get();
 //        newsRepository.save(orderDetailEntity);
         log.info("ActionLog.updateOrderDetail end");
+    }
+    public void deleteOrderDetail(Long id) {
+        log.info("ActionLog.deleteOrderDetail start");
+        orderDetailRepository.findById(id).orElseThrow(
+                () -> {
+                    log.error("ActionLog.deleteOrderDetail.error order detail not found with id: {}", id);
+                    throw new NotFoundException("ORDERDETAIL_NOT_FOUND");
+                }
+        );
+        log.info("ActionLog.deleteOrderDetail end");
+        orderDetailRepository.deleteById(id);
     }
 }

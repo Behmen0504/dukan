@@ -18,9 +18,9 @@ public class OrderDTO {
     String phoneNumber;
     String address;
 
-    ProductEntity product;
+    ProductDTO product;
 
-    UserEntity user;
+    UserDTO user;
 
     List<OrderDetailDTO> orderDetails;
 }

@@ -17,7 +17,7 @@ public class OrderDetailDTO {
 
     double priceForOne;
 
-    OrderEntity orderr;
+    OrderDTO orderr;
 
-    UserEntity user;
+    UserDTO user;
 }

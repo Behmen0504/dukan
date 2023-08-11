@@ -11,5 +11,5 @@ import lombok.experimental.FieldDefaults;
 public class SlideImageDTO {
     Long id;
 
-    String value;
+    String image;
 }

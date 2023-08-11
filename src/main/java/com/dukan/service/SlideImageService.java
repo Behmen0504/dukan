@@ -4,6 +4,7 @@ import com.dukan.dao.entity.SlideImageEntity;
 import com.dukan.dao.repository.SlideImageRepository;
 import com.dukan.mapper.SlideImageMapper;
 import com.dukan.model.SlideImageDTO;
+import com.dukan.model.exception.NotFoundException;
 import com.dukan.model.requests.SlideImageRequestDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,5 +43,16 @@ public class SlideImageService {
         SlideImageEntity slideImageEntity = slideImageRepository.findById(id).get();
 //        newsRepository.save(slideImageEntity);
         log.info("ActionLog.updateSlideImage end");
+    }
+    public void deleteSlideImage(Long id) {
+        log.info("ActionLog.deleteSlideImage start");
+        slideImageRepository.findById(id).orElseThrow(
+                () -> {
+                    log.error("ActionLog.deleteSlideImage.error slide image not found with id: {}", id);
+                    throw new NotFoundException("SLIDEIMAGE_NOT_FOUND");
+                }
+        );
+        log.info("ActionLog.deleteSlideImage end");
+        slideImageRepository.deleteById(id);
     }
 }

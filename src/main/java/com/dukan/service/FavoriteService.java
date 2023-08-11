@@ -4,6 +4,7 @@ import com.dukan.dao.entity.FavoriteEntity;
 import com.dukan.dao.repository.FavoriteRepository;
 import com.dukan.mapper.FavoriteMapper;
 import com.dukan.model.FavoriteDTO;
+import com.dukan.model.exception.NotFoundException;
 import com.dukan.model.requests.FavoriteRequestDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,5 +43,16 @@ public class FavoriteService {
         FavoriteEntity favoriteEntity = favoriteRepository.findById(id).get();
 //        newsRepository.save(favoriteEntity);
         log.info("ActionLog.updateFavorite end");
+    }
+    public void deleteFavorite(Long id) {
+        log.info("ActionLog.deleteFavorite start");
+        favoriteRepository.findById(id).orElseThrow(
+                () -> {
+                    log.error("ActionLog.deleteFavorite.error favorite not found with id: {}", id);
+                    throw new NotFoundException("FAVORITE_NOT_FOUND");
+                }
+        );
+        log.info("ActionLog.deleteFavorite end");
+        favoriteRepository.deleteById(id);
     }
 }

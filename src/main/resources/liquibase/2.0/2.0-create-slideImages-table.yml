@@ -1,4 +1,3 @@
-
 databaseChangeLog:
   - changeSet:
       id: Create Slide_Images table

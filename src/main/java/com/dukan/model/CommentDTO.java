@@ -19,7 +19,9 @@ public class CommentDTO {
 
     boolean anonymousComment;
 
-    ProductEntity product;
+    ProductDTO product;
 
-    UserEntity user;
+    UserDTO user;
+
+    CommentDTO comment;
 }

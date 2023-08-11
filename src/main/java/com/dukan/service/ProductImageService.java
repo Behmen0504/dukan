@@ -5,6 +5,7 @@ import com.dukan.dao.entity.ProductImageEntity;
 import com.dukan.dao.repository.ProductImageRepository;
 import com.dukan.mapper.ProductImageMapper;
 import com.dukan.model.ProductImageDTO;
+import com.dukan.model.exception.NotFoundException;
 import com.dukan.model.requests.ProductImageRequestDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -43,5 +44,16 @@ public class ProductImageService {
         ProductImageEntity productImageEntity = productImageRepository.findById(id).get();
 //        newsRepository.save(productImageEntity);
         log.info("ActionLog.updateProductImage end");
+    }
+    public void deleteProductImage(Long id) {
+        log.info("ActionLog.deleteProductImage start");
+        productImageRepository.findById(id).orElseThrow(
+                () -> {
+                    log.error("ActionLog.deleteProductImage.error product image not found with id: {}", id);
+                    throw new NotFoundException("PRODUCTIMAGE_NOT_FOUND");
+                }
+        );
+        log.info("ActionLog.deleteProductImage end");
+        productImageRepository.deleteById(id);
     }
 }

@@ -4,6 +4,7 @@ import com.dukan.dao.entity.GiftCodeEntity;
 import com.dukan.dao.repository.GiftCodeRepository;
 import com.dukan.mapper.GiftCodeMapper;
 import com.dukan.model.GiftCodeDTO;
+import com.dukan.model.exception.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -46,5 +47,17 @@ public class GiftCodeService {
 //        giftCodeEntity.setDescription(newsDTO.getDescription());
 //        giftCodeRepository.save(newsEntity);
         log.info("ActionLog.updateGiftCode end");
+    }
+
+    public void deleteGiftCode(Long id) {
+        log.info("ActionLog.deleteGiftCode start");
+        giftCodeRepository.findById(id).orElseThrow(
+                () -> {
+                    log.error("ActionLog.deleteGiftCode.error gift code not found with id: {}", id);
+                    throw new NotFoundException("GIFTCODE_NOT_FOUND");
+                }
+        );
+        log.info("ActionLog.deleteGiftCode end");
+        giftCodeRepository.deleteById(id);
     }
 }

@@ -38,7 +38,7 @@ public class ProductEntity {
     LocalDateTime updatedAt;
 
     @JsonManagedReference
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "category_id")
     CategoryEntity category;
 

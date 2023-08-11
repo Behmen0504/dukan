@@ -14,6 +14,7 @@ public abstract class SlideImageMapper {
     public static final SlideImageMapper INSTANCE = Mappers.getMapper(SlideImageMapper.class);
 
     public abstract SlideImageDTO mapEntityToDto(SlideImageEntity slideImageEntity);
+    public abstract SlideImageEntity mapDtoToEntity(SlideImageDTO slideImageDTO);
 
     public abstract SlideImageEntity mapSlideImageRequestDtoToEntity(SlideImageRequestDTO requestDto);
 

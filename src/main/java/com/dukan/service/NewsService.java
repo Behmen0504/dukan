@@ -4,6 +4,7 @@ import com.dukan.dao.entity.NewsEntity;
 import com.dukan.dao.repository.NewsRepository;
 import com.dukan.mapper.NewsMapper;
 import com.dukan.model.NewsDTO;
+import com.dukan.model.exception.NotFoundException;
 import com.dukan.model.requests.NewsRequestDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -47,5 +48,16 @@ public class NewsService {
         newsEntity.setDescription(requestDTO.getDescription());
         newsRepository.save(newsEntity);
         log.info("ActionLog.updateNews end");
+    }
+    public void deleteNews(Long id) {
+        log.info("ActionLog.deleteNews start");
+        newsRepository.findById(id).orElseThrow(
+                () -> {
+                    log.error("ActionLog.deleteNews.error news not found with id: {}", id);
+                    throw new NotFoundException("NEWS_NOT_FOUND");
+                }
+        );
+        log.info("ActionLog.deleteNews end");
+        newsRepository.deleteById(id);
     }
 }

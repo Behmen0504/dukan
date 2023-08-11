@@ -4,6 +4,7 @@ import com.dukan.dao.entity.QuestionEntity;
 import com.dukan.dao.repository.QuestionRepository;
 import com.dukan.mapper.QuestionMapper;
 import com.dukan.model.QuestionDTO;
+import com.dukan.model.exception.NotFoundException;
 import com.dukan.model.requests.QuestionRequestDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,5 +43,16 @@ public class QuestionService {
         QuestionEntity questionEntity = questionRepository.findById(id).get();
 //        newsRepository.save(newsEntity);
         log.info("ActionLog.updateQuestion end");
+    }
+    public void deleteQuestion(Long id) {
+        log.info("ActionLog.deleteQuestion start");
+        questionRepository.findById(id).orElseThrow(
+                () -> {
+                    log.error("ActionLog.deleteQuestion.error question not found with id: {}", id);
+                    throw new NotFoundException("QUESTION_NOT_FOUND");
+                }
+        );
+        log.info("ActionLog.deleteQuestion end");
+        questionRepository.deleteById(id);
     }
 }
