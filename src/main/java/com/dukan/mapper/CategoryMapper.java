@@ -19,8 +19,6 @@ public abstract class CategoryMapper {
 
     public abstract CategoryEntity mapCategoryRequestDtoToEntity(CategoryRequestDTO requestDto);
 
-    public List<CategoryDTO> mapEntitiesToDtos(List<CategoryEntity> categoryEntities){
-        return categoryEntities.stream().map(this::mapEntityToDto).collect(Collectors.toList());
-    }
+    public abstract List<CategoryDTO> mapEntitiesToDtos(List<CategoryEntity> categoryEntities);
 
 }
