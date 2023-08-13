@@ -40,7 +40,5 @@ public abstract class CommentMapper {
         if(id == null) return null;
         return CommentEntity.builder().id(id).build();
     }
-    public List<CommentDTO> mapEntitiesToDtos(List<CommentEntity> commentEntities) {
-        return commentEntities.stream().map(this::mapEntityToDto).collect(Collectors.toList());
-    }
+    public abstract List<CommentDTO> mapEntitiesToDtos(List<CommentEntity> commentEntities);
 }

@@ -17,7 +17,5 @@ public abstract class GiftCodeMapper {
     public abstract GiftCodeDTO mapEntityToDto(GiftCodeEntity giftCodeEntity);
     public abstract GiftCodeEntity mapDtoToEntity(GiftCodeDTO giftCodeDTO);
 
-    public List<GiftCodeDTO> mapEntitiesToDtos(List<GiftCodeEntity> giftCodeEntities){
-        return giftCodeEntities.stream().map(this::mapEntityToDto).collect(Collectors.toList());
-    }
+    public abstract List<GiftCodeDTO> mapEntitiesToDtos(List<GiftCodeEntity> giftCodeEntities);
 }

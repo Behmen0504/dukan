@@ -35,7 +35,5 @@ public abstract class OrderMapper {
         return UserEntity.builder().id(id).build();
     }
 
-    public List<OrderDTO> mapEntitiesToDtos(List<OrderEntity> orderEntities){
-        return orderEntities.stream().map(this::mapEntityToDto).collect(Collectors.toList());
-    }
+    public abstract List<OrderDTO> mapEntitiesToDtos(List<OrderEntity> orderEntities);
 }

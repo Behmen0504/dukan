@@ -29,7 +29,5 @@ public abstract class ProductMapper {
         return CategoryEntity.builder().id(id).build();
     }
 
-    public List<ProductDTO> mapEntitiesToDtos(List<ProductEntity> productEntities) {
-        return productEntities.stream().map(this::mapEntityToDto).collect(Collectors.toList());
-    }
+    public abstract List<ProductDTO> mapEntitiesToDtos(List<ProductEntity> productEntities);
 }

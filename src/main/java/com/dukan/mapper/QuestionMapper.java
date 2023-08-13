@@ -17,7 +17,5 @@ public abstract class QuestionMapper {
 
     public abstract QuestionEntity mapQuestionRequestDtoToEntity(QuestionRequestDTO requestDto);
 
-    public List<QuestionDTO> mapEntitiesToDtos(List<QuestionEntity> questionEntities){
-        return questionEntities.stream().map(this::mapEntityToDto).collect(Collectors.toList());
-    }
+    public abstract List<QuestionDTO> mapEntitiesToDtos(List<QuestionEntity> questionEntities);
 }
