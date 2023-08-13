@@ -24,8 +24,6 @@ public class ProductDTO {
     Integer sort;
     CategoryEntity category;
     List<ProductImageDTO> productImages;
-    List<FavoriteDTO> favorites;
-    List<OrderDTO> orders;
     List<CommentDTO> comments;
 
 }
