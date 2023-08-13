@@ -1,12 +1,12 @@
 server:
-  port: 8080
+  port: 8085
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     #    url: jdbc:postgresql://localhost:5432/springbootrelationwithliquibase?currentSchema=testliquibase
-    url: jdbc:postgresql://localhost:5432/db_dukan
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
-    password: memmedov516
+    password: ramin2004
   jpa:
     hibernate:
       ddl-auto: none

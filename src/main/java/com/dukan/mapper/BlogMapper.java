@@ -17,7 +17,5 @@ public abstract class BlogMapper {
 
     public abstract BlogEntity mapBlogRequestDtoToEntity(BlogRequestDTO requestDto);
 
-    public List<BlogDTO> mapEntitiesToDtos(List<BlogEntity> blogEntities){
-        return blogEntities.stream().map(this::mapEntityToDto).collect(Collectors.toList());
-    }
+    public abstract List<BlogDTO> mapEntitiesToDtos(List<BlogEntity> blogEntities);
 }

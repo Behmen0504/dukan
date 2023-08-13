@@ -36,7 +36,5 @@ public abstract class FavoriteMapper {
         if(id == null) return null;
         return UserEntity.builder().id(id).build();
     }
-    public List<FavoriteDTO> mapEntitiesToDtos(List<FavoriteEntity> favoriteEntities){
-        return favoriteEntities.stream().map(this::mapEntityToDto).collect(Collectors.toList());
-    }
+    public abstract List<FavoriteDTO> mapEntitiesToDtos(List<FavoriteEntity> favoriteEntities);
 }

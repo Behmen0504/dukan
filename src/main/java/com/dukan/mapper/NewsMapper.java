@@ -16,7 +16,5 @@ public abstract class NewsMapper {
     public abstract NewsDTO mapEntityToDto(NewsEntity newsEntity);
     public abstract NewsEntity mapDtoToEntity(NewsRequestDTO requestDTO);
 
-    public List<NewsDTO> mapEntitiesToDtos(List<NewsEntity> newsEntities){
-        return newsEntities.stream().map(this::mapEntityToDto).collect(Collectors.toList());
-    }
+    public abstract List<NewsDTO> mapEntitiesToDtos(List<NewsEntity> newsEntities);
 }
