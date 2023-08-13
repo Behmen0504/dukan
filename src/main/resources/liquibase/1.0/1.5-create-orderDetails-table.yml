@@ -1,11 +1,11 @@
 
 databaseChangeLog:
   - changeSet:
-      id: Create Orders table
+      id: Create Order_Details table
       author: Ramin Aliyev
       changes:
         - createTable:
-            tableName: orders
+            tableName: order_details
             columns:
               - column:
                   name: id
@@ -14,25 +14,31 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    remarks: id of orders
+                    remarks: id of order_details
               - column:
-                  name: tel
-                  type: varchar(128)
+                  name: count_product
+                  type: bigint
               - column:
-                  name: address
-                  type: varchar(255)
+                  name: price_for_one
+                  type: double
               - column:
-                  name: product_id
+                  name: order_id
                   type: bigint
                   constraints:
-                    foreignKeyName: fk_orders_to_products
-                    references: products(id)
+                    foreignKeyName: fk_order_details_to_orders
+                    references: orders(id)
               - column:
                   name: user_id
                   type: bigint
                   constraints:
-                    foreignKeyName: fk_orders_to_users
+                    foreignKeyName: fk_order_details_to_users
                     references: users(id)
+              - column:
+                  name: product_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_order_details_to_products
+                    references: products(id)
               - column:
                   name: created_at
                   type: timestamp

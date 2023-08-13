@@ -1,11 +1,11 @@
 
 databaseChangeLog:
   - changeSet:
-      id: Create Comments table
+      id: Create Product_Images table
       author: Ramin Aliyev
       changes:
         - createTable:
-            tableName: comments
+            tableName: product_images
             columns:
               - column:
                   name: id
@@ -14,30 +14,15 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    remarks: id of comments
+                    remarks: id of product_images
               - column:
-                  name: message
+                  name: image
                   type: text
-              - column:
-                  name: product_rate
-                  type: bigint
-              - column:
-                  name: anonymous_comment
-                  type: boolean
-                  defaultValue: false
-                  constraints:
-                    nullable: false
-              - column:
-                  name: user_id
-                  type: bigint
-                  constraints:
-                    foreignKeyName: fk_comments_to_users
-                    references: users(id)
               - column:
                   name: product_id
                   type: bigint
                   constraints:
-                    foreignKeyName: fk_comments_to_products
+                    foreignKeyName: fk_products_images_to_products
                     references: products(id)
               - column:
                   name: created_at

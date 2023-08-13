@@ -29,10 +29,10 @@ public class UserDTO {
     String password;
     String gender;
 
-    List<FavoriteEntity> favorites;
+    List<FavoriteDTO> favorites;
 
-    List<OrderEntity> orders;
+    List<OrderDTO> orders;
 
-    List<CommentEntity> comments;
+    List<CommentDTO> comments;
 
 }

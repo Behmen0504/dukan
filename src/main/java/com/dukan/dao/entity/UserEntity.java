@@ -41,7 +41,7 @@ public class UserEntity {
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
     List<OrderEntity> orders;
 
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
     List<CommentEntity> comments;
 }

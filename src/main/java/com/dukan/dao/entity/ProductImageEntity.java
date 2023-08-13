@@ -21,14 +21,14 @@ public class ProductImageEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String value;
+    String image;
     @CreationTimestamp
     LocalDateTime createdAt;
     @UpdateTimestamp
     LocalDateTime updatedAt;
 
     @JsonBackReference
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "_id")
+    @ManyToOne(cascade = {CascadeType.MERGE})
+    @JoinColumn(name = "product_id")
     ProductEntity product;
 }

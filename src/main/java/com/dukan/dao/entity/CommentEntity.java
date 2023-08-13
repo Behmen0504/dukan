@@ -1,6 +1,5 @@
 package com.dukan.dao.entity;
 
-import com.dukan.myenums.Status;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -10,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "blogs")
+@Table(name = "comments")
 public class CommentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,14 +28,23 @@ public class CommentEntity {
     boolean anonymousComment;
 
     @JsonBackReference
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "product_id")
     ProductEntity product;
 
-    @JsonBackReference
-    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "user_id")
     UserEntity user;
+
+    @JsonManagedReference
+    @OneToMany(cascade = {CascadeType.MERGE})
+    List<CommentEntity> commentEntities;
+
+    @JsonBackReference
+    @ManyToOne(cascade = {CascadeType.MERGE})
+    @JoinColumn(name = "comment_id")
+    CommentEntity comment;
 
     @CreationTimestamp
     LocalDateTime createdAt;

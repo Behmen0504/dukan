@@ -1,11 +1,11 @@
 
 databaseChangeLog:
   - changeSet:
-      id: Create Users table
+      id: Create Orders table
       author: Ramin Aliyev
       changes:
         - createTable:
-            tableName: users
+            tableName: orders
             columns:
               - column:
                   name: id
@@ -14,33 +14,27 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    remarks: id of users
+                    remarks: id of orders
               - column:
-                  name: name
-                  type: varchar(255)
-              - column:
-                  name: surname
-                  type: varchar(255)
-              - column:
-                  name: email
-                  type: varchar(255)
-              - column:
-                  name: tel
+                  name: phone_number
                   type: varchar(128)
               - column:
-                  name: password
+                  name: address
                   type: varchar(255)
               - column:
-                  name: gender
-                  type: varchar(32)
+                  name: product_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_orders_to_products
+                    references: products(id)
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_orders_to_users
+                    references: users(id)
               - column:
                   name: created_at
-                  type: timestamp
-                  defaultValue: now()
-                  constraints:
-                    nullable: false
-              - column:
-                  name: updated_at
                   type: timestamp
                   defaultValue: now()
                   constraints:

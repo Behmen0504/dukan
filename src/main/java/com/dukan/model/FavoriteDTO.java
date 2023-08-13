@@ -20,10 +20,7 @@ import java.time.LocalDateTime;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class FavoriteDTO {
     Long id;
-    String name;
-    String image;
-    Double price;
-    ProductEntity product;
-    UserEntity user;
+    ProductDTO product;
+    UserDTO user;
 
 }

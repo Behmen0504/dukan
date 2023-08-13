@@ -20,15 +20,16 @@ public class OrderEntity {
     Long id;
 
     String phoneNumber;
+    String address;
 
 
     @JsonManagedReference
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "product_id")
-    ProductEntity productOrd;
+    ProductEntity product;
 
     @JsonManagedReference
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "user_id")
     UserEntity user;
 

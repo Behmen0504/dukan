@@ -1,6 +1,5 @@
 package com.dukan.model;
 
-import com.dukan.dao.entity.OrderDetailEntity;
 import com.dukan.dao.entity.ProductEntity;
 import com.dukan.dao.entity.UserEntity;
 import lombok.*;
@@ -17,10 +16,11 @@ public class OrderDTO {
     Long id;
 
     String phoneNumber;
+    String address;
 
-    ProductEntity productOrd;
+    ProductDTO product;
 
-    UserEntity user;
+    UserDTO user;
 
-    List<OrderDetailEntity> orderDetails;
+    List<OrderDetailDTO> orderDetails;
 }

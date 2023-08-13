@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "questions")
-public class Questions {
+public class QuestionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;

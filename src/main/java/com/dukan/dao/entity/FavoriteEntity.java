@@ -20,9 +20,7 @@ public class FavoriteEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String name;
-    String image;
-    Double price;
+
     @CreationTimestamp
     LocalDateTime createdAt;
     @UpdateTimestamp
@@ -30,11 +28,11 @@ public class FavoriteEntity {
 
 
     @JsonManagedReference
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "product_id")
     ProductEntity product;
     @JsonManagedReference
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "user_id")
     UserEntity user;
 }

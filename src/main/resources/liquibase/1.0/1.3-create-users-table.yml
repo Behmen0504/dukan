@@ -1,11 +1,11 @@
 
 databaseChangeLog:
   - changeSet:
-      id: Create Product_Images table
+      id: Create Users table
       author: Ramin Aliyev
       changes:
         - createTable:
-            tableName: product_images
+            tableName: users
             columns:
               - column:
                   name: id
@@ -14,16 +14,28 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    remarks: id of product_images
+                    remarks: id of users
               - column:
-                  name: value
-                  type: text
+                  name: name
+                  type: varchar(255)
               - column:
-                  name: products_id
-                  type: bigint
-                  constraints:
-                    foreignKeyName: fk_products_images_to_products
-                    references: products(id)
+                  name: surname
+                  type: varchar(255)
+              - column:
+                  name: email
+                  type: varchar(255)
+              - column:
+                  name: phone_number
+                  type: varchar(128)
+              - column:
+                  name: password
+                  type: varchar(255)
+              - column:
+                  name: gender
+                  type: varchar(32)
+              - column:
+                  name: address
+                  type: varchar(32)
               - column:
                   name: created_at
                   type: timestamp

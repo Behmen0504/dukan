@@ -23,9 +23,9 @@ databaseChangeLog:
               - column:
                   name: stock
                   type: boolean
-                  defaultValue: true
-                  constraints:
-                    nullable: false
+#                  defaultValue: true
+#                  constraints:
+#                    nullable: false
               - column:
                   name: stock_code
                   type: varchar(255)
@@ -36,7 +36,10 @@ databaseChangeLog:
                   name: price
                   type: double
               - column:
-                  name: categories_id
+                  name: sort
+                  type: integer
+              - column:
+                  name: category_id
                   type: bigint
                   constraints:
                     foreignKeyName: fk_products_to_categories

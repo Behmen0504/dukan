@@ -35,10 +35,10 @@ public class ProductEntity {
     @CreationTimestamp
     LocalDateTime createdAt;
     @UpdateTimestamp
-    LocalDateTime updateAt;
+    LocalDateTime updatedAt;
 
     @JsonManagedReference
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "category_id")
     CategoryEntity category;
 
@@ -51,7 +51,7 @@ public class ProductEntity {
     List<FavoriteEntity> favorites;
 
     @JsonBackReference
-    @OneToMany(mappedBy = "productOrd")
+    @OneToMany(mappedBy = "product")
     List<OrderEntity> orders;
 
     @JsonManagedReference
