@@ -8,6 +8,7 @@ import com.dukan.mapper.OrderMapper;
 import com.dukan.model.OrderDTO;
 import com.dukan.model.exception.NotFoundException;
 import com.dukan.model.requests.OrderRequestDTO;
+import com.dukan.myenums.Status;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class OrderService {
 
     public List<OrderDTO> getOrders() {
         log.info("ActionLog.getOrders start");
-        List<OrderDTO> orderDTOS = OrderMapper.INSTANCE.mapEntitiesToDtos(orderRepository.findAll());
+        List<OrderDTO> orderDTOS = OrderMapper.INSTANCE.mapEntitiesToDtos(orderRepository.getOrderEntitiesByStatus(Status.ENABLE));
         log.info("ActionLog.getOrders end");
         return orderDTOS;
     }

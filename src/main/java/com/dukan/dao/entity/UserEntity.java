@@ -1,5 +1,6 @@
 package com.dukan.dao.entity;
 
+import com.dukan.myenums.Status;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -28,6 +29,10 @@ public class UserEntity {
     String phoneNumber;
     String password;
     String gender;
+
+    @Enumerated(EnumType.STRING)
+    Status status;
+
     @CreationTimestamp
     LocalDateTime createdAt;
     @UpdateTimestamp

@@ -1,5 +1,6 @@
 package com.dukan.dao.entity;
 
+import com.dukan.myenums.Status;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -21,6 +22,8 @@ public class OrderEntity {
 
     String phoneNumber;
     String address;
+    @Enumerated(EnumType.STRING)
+    Status status;
 
 
     @JsonManagedReference

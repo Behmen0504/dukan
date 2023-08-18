@@ -6,6 +6,7 @@ import com.dukan.mapper.ProductMapper;
 import com.dukan.model.ProductDTO;
 import com.dukan.model.exception.NotFoundException;
 import com.dukan.model.requests.ProductRequestDTO;
+import com.dukan.myenums.Status;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class ProductService {
 
     public List<ProductDTO> getProducts() {
         log.info("ActionLog.getProducts start");
-        List<ProductDTO> productDTOS = ProductMapper.INSTANCE.mapEntitiesToDtos(productRepository.findAll());
+        List<ProductDTO> productDTOS = ProductMapper.INSTANCE.mapEntitiesToDtos(productRepository.getProductEntitiesByStatus(Status.ENABLE));
         log.info("ActionLog.getProducts end");
         return productDTOS;
     }

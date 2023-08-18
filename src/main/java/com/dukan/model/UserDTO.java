@@ -3,6 +3,7 @@ package com.dukan.model;
 import com.dukan.dao.entity.CommentEntity;
 import com.dukan.dao.entity.FavoriteEntity;
 import com.dukan.dao.entity.OrderEntity;
+import com.dukan.myenums.Status;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
@@ -28,6 +29,7 @@ public class UserDTO {
     String phoneNumber;
     String password;
     String gender;
+    Status status;
 
     List<FavoriteDTO> favorites;
 

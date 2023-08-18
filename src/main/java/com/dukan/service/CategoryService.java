@@ -6,6 +6,7 @@ import com.dukan.mapper.CategoryMapper;
 import com.dukan.model.CategoryDTO;
 import com.dukan.model.exception.NotFoundException;
 import com.dukan.model.requests.CategoryRequestDTO;
+import com.dukan.myenums.Status;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class CategoryService {
 
     public List<CategoryDTO> getCategories() {
         log.info("ActionLog.getCategories start");
-        List<CategoryDTO> categoryDTOS = CategoryMapper.INSTANCE.mapEntitiesToDtos(categoryRepository.findAll());
+        List<CategoryDTO> categoryDTOS = CategoryMapper.INSTANCE.mapEntitiesToDtos(categoryRepository.getCategoryEntitiesByStatus(Status.ENABLE));
         log.info("ActionLog.getCategories end");
         return categoryDTOS;
     }

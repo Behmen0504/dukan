@@ -2,6 +2,7 @@ package com.dukan.controller;
 
 import com.dukan.model.CategoryDTO;
 import com.dukan.model.requests.CategoryRequestDTO;
+import com.dukan.myenums.Status;
 import com.dukan.service.CategoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

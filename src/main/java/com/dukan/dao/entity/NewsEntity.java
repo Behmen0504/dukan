@@ -24,8 +24,8 @@ public class NewsEntity {
     String image;
     String description;
 
-    @Enumerated(EnumType.STRING)
-    Status status;
+//    @Enumerated(EnumType.STRING)
+//    Status status;
 
     @CreationTimestamp
     LocalDateTime createdAt;

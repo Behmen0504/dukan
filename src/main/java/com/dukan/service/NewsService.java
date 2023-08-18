@@ -44,7 +44,7 @@ public class NewsService {
         NewsEntity newsEntity = newsRepository.findById(id).get();
         newsEntity.setTitle(requestDTO.getTitle());
         newsEntity.setImage(requestDTO.getImage());
-        newsEntity.setStatus(requestDTO.getStatus());
+//        newsEntity.setStatus(requestDTO.getStatus());
         newsEntity.setDescription(requestDTO.getDescription());
         newsRepository.save(newsEntity);
         log.info("ActionLog.updateNews end");

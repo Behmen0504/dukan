@@ -19,7 +19,7 @@ databaseChangeLog:
                   type: text
               - column:
                   name: status
-                  type: varchar(255)
+                  type: varchar(32)
               - column:
                   name: stock
                   type: boolean

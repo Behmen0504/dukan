@@ -14,5 +14,5 @@ public class NewsRequestDTO {
     String title;
     String image;
     String description;
-    Status status = Status.ENABLE;
+//    Status status = Status.ENABLE;
 }
