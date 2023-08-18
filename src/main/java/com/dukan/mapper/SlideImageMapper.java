@@ -18,7 +18,5 @@ public abstract class SlideImageMapper {
 
     public abstract SlideImageEntity mapSlideImageRequestDtoToEntity(SlideImageRequestDTO requestDto);
 
-    public List<SlideImageDTO> mapEntitiesToDtos(List<SlideImageEntity> slideImageEntities){
-        return slideImageEntities.stream().map(this::mapEntityToDto).collect(Collectors.toList());
-    }
+    public abstract List<SlideImageDTO> mapEntitiesToDtos(List<SlideImageEntity> slideImageEntities);
 }

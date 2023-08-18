@@ -17,7 +17,5 @@ public abstract class UserMapper {
 
     public abstract UserEntity mapUserRequestDtoToEntity(UserRequestDTO requestDto);
 
-    public List<UserDTO> mapEntitiesToDtos(List<UserEntity> userEntities){
-        return userEntities.stream().map(this::mapEntityToDto).collect(Collectors.toList());
-    }
+    public abstract List<UserDTO> mapEntitiesToDtos(List<UserEntity> userEntities);
 }

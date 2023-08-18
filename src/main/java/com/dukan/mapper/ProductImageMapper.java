@@ -32,7 +32,5 @@ public abstract class ProductImageMapper {
         return ProductEntity.builder().id(id).build();
     }
 
-    public List<ProductImageDTO> mapEntitiesToDtos(List<ProductImageEntity> productImageEntities){
-        return productImageEntities.stream().map(this::mapEntityToDto).collect(Collectors.toList());
-    }
+    public abstract List<ProductImageDTO> mapEntitiesToDtos(List<ProductImageEntity> productImageEntities);
 }
