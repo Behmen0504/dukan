@@ -35,9 +35,12 @@ public class ProductService {
 
     public ProductDTO getProduct(Long id) {
         log.info("ActionLog.getProduct start");
-        ProductDTO productDTO = ProductMapper.INSTANCE.mapEntityToDto(
-                productRepository
-                        .findProductEntityByIdAndStatus(id, Status.ENABLE));
+        var product = productRepository.findProductEntityByIdAndStatus(id,Status.ENABLE);
+        if (product == null) {
+            log.error("ActionLog.getProduct.error product not found with id: {}", id);
+            throw new NotFoundException("PRODUCT_NOT_FOUND");
+        }
+        ProductDTO productDTO = ProductMapper.INSTANCE.mapEntityToDto(product);
         log.info("ActionLog.getProduct end");
         return productDTO;
     }
@@ -59,13 +62,6 @@ public class ProductService {
     @Transactional
     public void deleteProduct(Long id) {
         log.info("ActionLog.deleteProduct start");
-//        productRepository.findById(id)
-//                .orElseThrow(
-//                () -> {
-//                    log.error("ActionLog.deleteProduct.error product not found with id: {}", id);
-//                    throw new NotFoundException("PRODUCT_NOT_FOUND");
-//                }
-//        );
         ProductEntity productEntity = productRepository.findProductEntityByIdAndStatus(id, Status.ENABLE);
         if (productEntity == null) {
             log.error("ActionLog.deleteProduct.error product not found with id: {}", id);

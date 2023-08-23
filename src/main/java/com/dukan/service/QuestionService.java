@@ -27,10 +27,19 @@ public class QuestionService {
 
     public QuestionDTO getQuestion(Long id) {
         log.info("ActionLog.getQuestion start");
-        QuestionDTO questionDTO = QuestionMapper.INSTANCE.mapEntityToDto(questionRepository.findById(id).get());
+        QuestionDTO questionDTO = QuestionMapper.INSTANCE.mapEntityToDto(
+                questionRepository
+                        .findById(id)
+                        .orElseThrow(
+                                () -> {
+                                    log.error("ActionLog.getQuestion.error question not found with id: {}", id);
+                                    throw new NotFoundException("QUESTION_NOT_FOUND");
+                                }
+                        ));
         log.info("ActionLog.getQuestion end");
         return questionDTO;
     }
+
     public void addQuestion(QuestionRequestDTO requestDTO) {
         log.info("ActionLog.addQuestion start");
         QuestionEntity questionEntity = QuestionMapper.INSTANCE.mapQuestionRequestDtoToEntity(requestDTO);
@@ -44,6 +53,7 @@ public class QuestionService {
 //        newsRepository.save(newsEntity);
         log.info("ActionLog.updateQuestion end");
     }
+
     public void deleteQuestion(Long id) {
         log.info("ActionLog.deleteQuestion start");
         questionRepository.findById(id).orElseThrow(
@@ -52,7 +62,7 @@ public class QuestionService {
                     throw new NotFoundException("QUESTION_NOT_FOUND");
                 }
         );
-        log.info("ActionLog.deleteQuestion end");
         questionRepository.deleteById(id);
+        log.info("ActionLog.deleteQuestion end");
     }
 }

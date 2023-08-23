@@ -27,10 +27,19 @@ public class CommentService {
 
     public CommentDTO getComment(Long id) {
         log.info("ActionLog.getComment start");
-        CommentDTO commentDTO = CommentMapper.INSTANCE.mapEntityToDto(commentRepository.findById(id).get());
+        CommentDTO commentDTO = CommentMapper.INSTANCE.mapEntityToDto(
+                commentRepository
+                        .findById(id)
+                        .orElseThrow(
+                                () -> {
+                                    log.error("ActionLog.getComment.error comment not found with id: {}", id);
+                                    throw new NotFoundException("COMMENT_NOT_FOUND");
+                                }
+                        ));
         log.info("ActionLog.getComment end");
         return commentDTO;
     }
+
     public void addComment(CommentRequestDTO requestDTO) {
         log.info("ActionLog.addComment start");
         CommentEntity commentEntity = CommentMapper.INSTANCE.mapCommentRequestDtoToEntity(requestDTO);
@@ -44,6 +53,7 @@ public class CommentService {
 //        newsRepository.save(newsEntity);
         log.info("ActionLog.updateComment end");
     }
+
     public void deleteComment(Long id) {
         log.info("ActionLog.deleteComment start");
         commentRepository.findById(id).orElseThrow(
@@ -52,7 +62,7 @@ public class CommentService {
                     throw new NotFoundException("COMMENT_NOT_FOUND");
                 }
         );
-        log.info("ActionLog.deleteComment end");
         commentRepository.deleteById(id);
+        log.info("ActionLog.deleteComment end");
     }
 }

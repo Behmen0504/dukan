@@ -32,7 +32,13 @@ public class CategoryService {
 
     public CategoryDTO getCategory(Long id) {
         log.info("ActionLog.getCategory start");
-        CategoryDTO categoryDTO = CategoryMapper.INSTANCE.mapEntityToDto(categoryRepository.findCategoryEntityByIdAndStatus(id,Status.ENABLE));
+        var category = categoryRepository.findCategoryEntityByIdAndStatus(id,Status.ENABLE);
+        if (category == null){
+            log.error("ActionLog.getCategory.error category not found with id: {}", id);
+            throw new NotFoundException("CATEGORY_NOT_FOUND");
+        }
+        CategoryDTO categoryDTO = CategoryMapper.INSTANCE
+                .mapEntityToDto(category);
         log.info("ActionLog.getCategory end");
         return categoryDTO;
     }

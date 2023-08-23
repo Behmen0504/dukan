@@ -28,10 +28,19 @@ public class GiftCodeService {
 
     public GiftCodeDTO getGiftCode(Long id) {
         log.info("ActionLog.getGiftCode start");
-        GiftCodeDTO giftCodeDTO = GiftCodeMapper.INSTANCE.mapEntityToDto(giftCodeRepository.findById(id).get());
+        GiftCodeDTO giftCodeDTO = GiftCodeMapper.INSTANCE.mapEntityToDto(
+                giftCodeRepository
+                        .findById(id)
+                        .orElseThrow(
+                                () -> {
+                                    log.error("ActionLog.getGiftCode.error gift code not found with id: {}", id);
+                                    throw new NotFoundException("GIFTCODE_NOT_FOUND");
+                                }
+                        ));
         log.info("ActionLog.getGiftCode end");
         return giftCodeDTO;
     }
+
     public void addGiftCode(GiftCodeDTO giftCodeDTO) {
         log.info("ActionLog.addGiftCode start");
         giftCodeRepository.save(GiftCodeMapper.INSTANCE.mapDtoToEntity(giftCodeDTO));
@@ -57,7 +66,7 @@ public class GiftCodeService {
                     throw new NotFoundException("GIFTCODE_NOT_FOUND");
                 }
         );
-        log.info("ActionLog.deleteGiftCode end");
         giftCodeRepository.deleteById(id);
+        log.info("ActionLog.deleteGiftCode end");
     }
 }

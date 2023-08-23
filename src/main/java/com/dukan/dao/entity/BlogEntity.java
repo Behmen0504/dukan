@@ -1,6 +1,5 @@
 package com.dukan.dao.entity;
 
-import com.dukan.myenums.Status;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -24,8 +23,6 @@ public class BlogEntity {
     String image;
     String description;
 
-//    @Enumerated(EnumType.STRING)
-//    Status status;
     @CreationTimestamp
     LocalDateTime createdAt;
     @UpdateTimestamp

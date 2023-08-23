@@ -30,10 +30,19 @@ public class OrderService {
 
     public OrderDTO getOrder(Long id) {
         log.info("ActionLog.getOrder start");
-        OrderDTO orderDTO = OrderMapper.INSTANCE.mapEntityToDto(orderRepository.findById(id).get());
+        OrderDTO orderDTO = OrderMapper.INSTANCE.mapEntityToDto(
+                orderRepository
+                        .findById(id)
+                        .orElseThrow(
+                                () -> {
+                                    log.error("ActionLog.getOrder.error order not found with id: {}", id);
+                                    throw new NotFoundException("ORDER_NOT_FOUND");
+                                }
+                        ));
         log.info("ActionLog.getOrder end");
         return orderDTO;
     }
+
     public void addOrder(OrderRequestDTO requestDTO) {
         log.info("ActionLog.addOrder start");
         OrderEntity orderEntity = OrderMapper.INSTANCE.mapOrderRequestDtoToEntity(requestDTO);
@@ -47,15 +56,16 @@ public class OrderService {
 //        newsRepository.save(newsEntity);
         log.info("ActionLog.updateOrder end");
     }
+
     public void deleteOrder(Long id) {
         log.info("ActionLog.deleteOrder start");
-        orderRepository.findById(id).orElseThrow(
-                () -> {
-                    log.error("ActionLog.deleteOrder.error order not found with id: {}", id);
-                    throw new NotFoundException("ORDER_NOT_FOUND");
-                }
-        );
+        var order = orderRepository.findOrderEntityByIdAndStatus(id, Status.ENABLE);
+        if (order == null) {
+            log.error("ActionLog.deleteProduct.error product not found with id: {}", id);
+            throw new NotFoundException("PRODUCT_NOT_FOUND");
+        }
+        order.setStatus(Status.DISABLE);
+        orderRepository.save(order);
         log.info("ActionLog.deleteOrder end");
-        orderRepository.deleteById(id);
     }
 }

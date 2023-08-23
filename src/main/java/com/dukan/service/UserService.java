@@ -1,11 +1,16 @@
 package com.dukan.service;
 
+import com.dukan.dao.entity.OrderEntity;
 import com.dukan.dao.entity.UserEntity;
+import com.dukan.dao.repository.FavoriteRepository;
+import com.dukan.dao.repository.OrderRepository;
 import com.dukan.dao.repository.UserRepository;
 import com.dukan.mapper.UserMapper;
 import com.dukan.model.UserDTO;
 import com.dukan.model.exception.NotFoundException;
 import com.dukan.model.requests.UserRequestDTO;
+import com.dukan.myenums.Status;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,6 +22,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final FavoriteRepository favoriteRepository;
+    private final OrderRepository orderRepository;
 
     public List<UserDTO> getUsers() {
         log.info("ActionLog.getUsers start");
@@ -44,15 +51,22 @@ public class UserService {
 //        newsRepository.save(userEntity);
         log.info("ActionLog.updateUser end");
     }
+    @Transactional
     public void deleteUser(Long id) {
         log.info("ActionLog.deleteUser start");
-        userRepository.findById(id).orElseThrow(
-                () -> {
-                    log.error("ActionLog.deleteUser.error user not found with id: {}", id);
-                    throw new NotFoundException("USER_NOT_FOUND");
-                }
-        );
+        var user = userRepository.findUserEntityByIdAndStatus(id, Status.ENABLE);
+        if (user == null){
+            log.error("ActionLog.deleteUser.error user not found with id: {}", id);
+            throw new NotFoundException("USER_NOT_FOUND");
+        }
+        favoriteRepository.deleteByUser_Id(id);
+        List<OrderEntity> orderEntities = orderRepository.getOrderEntitiesByUser_Id(id);
+        if (orderEntities != null){
+            orderEntities.forEach(orderEntity -> orderEntity.setStatus(Status.DISABLE));
+            orderRepository.saveAll(orderEntities);
+        }
+        user.setStatus(Status.DISABLE);
+        userRepository.save(user);
         log.info("ActionLog.deleteUser end");
-        userRepository.deleteById(id);
     }
 }

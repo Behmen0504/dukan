@@ -27,10 +27,19 @@ public class FavoriteService {
 
     public FavoriteDTO getFavorite(Long id) {
         log.info("ActionLog.getFavorite start");
-        FavoriteDTO favoriteDTO = FavoriteMapper.INSTANCE.mapEntityToDto(favoriteRepository.findById(id).get());
+        FavoriteDTO favoriteDTO = FavoriteMapper.INSTANCE.mapEntityToDto(
+                favoriteRepository
+                        .findById(id)
+                        .orElseThrow(
+                                () -> {
+                                    log.error("ActionLog.getFavorite.error favorite not found with id: {}", id);
+                                    throw new NotFoundException("FAVORITE_NOT_FOUND");
+                                }
+                        ));
         log.info("ActionLog.getFavorite end");
         return favoriteDTO;
     }
+
     public void addFavorite(FavoriteRequestDTO requestDTO) {
         log.info("ActionLog.addFavorite start");
         FavoriteEntity favoriteEntity = FavoriteMapper.INSTANCE.mapFavoriteRequestDtoToEntity(requestDTO);
@@ -44,6 +53,7 @@ public class FavoriteService {
 //        newsRepository.save(favoriteEntity);
         log.info("ActionLog.updateFavorite end");
     }
+
     public void deleteFavorite(Long id) {
         log.info("ActionLog.deleteFavorite start");
         favoriteRepository.findById(id).orElseThrow(
@@ -52,7 +62,7 @@ public class FavoriteService {
                     throw new NotFoundException("FAVORITE_NOT_FOUND");
                 }
         );
-        log.info("ActionLog.deleteFavorite end");
         favoriteRepository.deleteById(id);
+        log.info("ActionLog.deleteFavorite end");
     }
 }

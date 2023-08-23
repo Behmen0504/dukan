@@ -27,10 +27,19 @@ public class OrderDetailService {
 
     public OrderDetailDTO getOrderDetail(Long id) {
         log.info("ActionLog.getOrderDetail start");
-        OrderDetailDTO orderDetailDTO = OrderDetailMapper.INSTANCE.mapEntityToDto(orderDetailRepository.findById(id).get());
+        OrderDetailDTO orderDetailDTO = OrderDetailMapper.INSTANCE.mapEntityToDto(
+                orderDetailRepository
+                        .findById(id)
+                        .orElseThrow(
+                                () -> {
+                                    log.error("ActionLog.getOrderDetail.error order detail not found with id: {}", id);
+                                    throw new NotFoundException("ORDERDETAIL_NOT_FOUND");
+                                }
+                        ));
         log.info("ActionLog.getOrderDetail end");
         return orderDetailDTO;
     }
+
     public void addOrderDetail(OrderDetailRequestDTO requestDTO) {
         log.info("ActionLog.addOrderDetail start");
         OrderDetailEntity orderDetailEntity = OrderDetailMapper.INSTANCE.mapOrderDetailRequestDtoToEntity(requestDTO);
@@ -44,6 +53,7 @@ public class OrderDetailService {
 //        newsRepository.save(orderDetailEntity);
         log.info("ActionLog.updateOrderDetail end");
     }
+
     public void deleteOrderDetail(Long id) {
         log.info("ActionLog.deleteOrderDetail start");
         orderDetailRepository.findById(id).orElseThrow(
@@ -52,7 +62,7 @@ public class OrderDetailService {
                     throw new NotFoundException("ORDERDETAIL_NOT_FOUND");
                 }
         );
-        log.info("ActionLog.deleteOrderDetail end");
         orderDetailRepository.deleteById(id);
+        log.info("ActionLog.deleteOrderDetail end");
     }
 }

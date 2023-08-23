@@ -6,6 +6,7 @@ import com.dukan.mapper.BlogMapper;
 import com.dukan.model.BlogDTO;
 import com.dukan.model.exception.NotFoundException;
 import com.dukan.model.requests.BlogRequestDTO;
+import com.dukan.myenums.Status;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,15 @@ public class BlogService {
 
     public BlogDTO getBlog(Long id) {
         log.info("ActionLog.getBlog start");
-        BlogDTO blogDTO = BlogMapper.INSTANCE.mapEntityToDto(blogRepository.findById(id).get());
+        BlogDTO blogDTO = BlogMapper.INSTANCE.mapEntityToDto(
+                blogRepository
+                .findById(id)
+                .orElseThrow(
+                        () -> {
+                            log.error("ActionLog.getBlog.error blog not found with id: {}", id);
+                            throw new NotFoundException("BLOG_NOT_FOUND");
+                        }
+                ));
         log.info("ActionLog.getBlog end");
         return blogDTO;
     }

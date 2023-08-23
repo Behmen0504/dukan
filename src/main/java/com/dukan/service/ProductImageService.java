@@ -28,10 +28,19 @@ public class ProductImageService {
 
     public ProductImageDTO getProductImage(Long id) {
         log.info("ActionLog.getProductImage start");
-        ProductImageDTO productImageDTO = ProductImageMapper.INSTANCE.mapEntityToDto(productImageRepository.findById(id).get());
+        ProductImageDTO productImageDTO = ProductImageMapper.INSTANCE.mapEntityToDto(
+                productImageRepository
+                        .findById(id)
+                        .orElseThrow(
+                                () -> {
+                                    log.error("ActionLog.getProductImage.error product image not found with id: {}", id);
+                                    throw new NotFoundException("PRODUCTIMAGE_NOT_FOUND");
+                                }
+                        ));
         log.info("ActionLog.getProductImage end");
         return productImageDTO;
     }
+
     public void addProductImage(ProductImageRequestDTO requestDTO) {
         log.info("ActionLog.addProductImage start");
         ProductImageEntity productImageEntity = ProductImageMapper.INSTANCE.mapProductImageRequestDtoToEntity(requestDTO);
@@ -45,6 +54,7 @@ public class ProductImageService {
 //        newsRepository.save(productImageEntity);
         log.info("ActionLog.updateProductImage end");
     }
+
     public void deleteProductImage(Long id) {
         log.info("ActionLog.deleteProductImage start");
         productImageRepository.findById(id).orElseThrow(
@@ -53,7 +63,8 @@ public class ProductImageService {
                     throw new NotFoundException("PRODUCTIMAGE_NOT_FOUND");
                 }
         );
-        log.info("ActionLog.deleteProductImage end");
         productImageRepository.deleteById(id);
+        log.info("ActionLog.deleteProductImage end");
+
     }
 }

@@ -29,10 +29,19 @@ public class NewsService {
 
     public NewsDTO getNewsById(Long id) {
         log.info("ActionLog.getNews start");
-        NewsDTO newsDTO = NewsMapper.INSTANCE.mapEntityToDto(newsRepository.findById(id).get());
+        NewsDTO newsDTO = NewsMapper.INSTANCE.mapEntityToDto(
+                newsRepository
+                        .findById(id)
+                        .orElseThrow(
+                                () -> {
+                                    log.error("ActionLog.getNewsById.error news not found with id: {}", id);
+                                    throw new NotFoundException("NEWS_NOT_FOUND");
+                                }
+                        ));
         log.info("ActionLog.getNews end");
         return newsDTO;
     }
+
     public void addNews(NewsRequestDTO requestDTO) {
         log.info("ActionLog.addNews start");
         newsRepository.save(NewsMapper.INSTANCE.mapDtoToEntity(requestDTO));
@@ -49,6 +58,7 @@ public class NewsService {
         newsRepository.save(newsEntity);
         log.info("ActionLog.updateNews end");
     }
+
     public void deleteNews(Long id) {
         log.info("ActionLog.deleteNews start");
         newsRepository.findById(id).orElseThrow(
@@ -57,7 +67,7 @@ public class NewsService {
                     throw new NotFoundException("NEWS_NOT_FOUND");
                 }
         );
-        log.info("ActionLog.deleteNews end");
         newsRepository.deleteById(id);
+        log.info("ActionLog.deleteNews end");
     }
 }

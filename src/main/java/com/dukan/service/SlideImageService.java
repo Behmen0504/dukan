@@ -27,10 +27,19 @@ public class SlideImageService {
 
     public SlideImageDTO getSlideImage(Long id) {
         log.info("ActionLog.getSlideImage start");
-        SlideImageDTO  slideImageDTO= SlideImageMapper.INSTANCE.mapEntityToDto(slideImageRepository.findById(id).get());
+        SlideImageDTO slideImageDTO = SlideImageMapper.INSTANCE.mapEntityToDto(
+                slideImageRepository
+                        .findById(id)
+                        .orElseThrow(
+                                () -> {
+                                    log.error("ActionLog.getSlideImage.error slide image not found with id: {}", id);
+                                    throw new NotFoundException("SLIDEIMAGE_NOT_FOUND");
+                                }
+                        ));
         log.info("ActionLog.getSlideImage end");
         return slideImageDTO;
     }
+
     public void addSlideImage(SlideImageRequestDTO requestDTO) {
         log.info("ActionLog.addSlideImage start");
         SlideImageEntity slideImageEntity = SlideImageMapper.INSTANCE.mapSlideImageRequestDtoToEntity(requestDTO);
@@ -44,6 +53,7 @@ public class SlideImageService {
 //        newsRepository.save(slideImageEntity);
         log.info("ActionLog.updateSlideImage end");
     }
+
     public void deleteSlideImage(Long id) {
         log.info("ActionLog.deleteSlideImage start");
         slideImageRepository.findById(id).orElseThrow(
@@ -52,7 +62,8 @@ public class SlideImageService {
                     throw new NotFoundException("SLIDEIMAGE_NOT_FOUND");
                 }
         );
-        log.info("ActionLog.deleteSlideImage end");
         slideImageRepository.deleteById(id);
+        log.info("ActionLog.deleteSlideImage end");
+
     }
 }
