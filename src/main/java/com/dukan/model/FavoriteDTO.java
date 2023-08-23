@@ -21,6 +21,4 @@ import java.time.LocalDateTime;
 public class FavoriteDTO {
     Long id;
     ProductDTO product;
-    UserDTO user;
-
 }

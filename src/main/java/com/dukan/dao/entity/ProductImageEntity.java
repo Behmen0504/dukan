@@ -1,6 +1,8 @@
 package com.dukan.dao.entity;
 
+import com.dukan.myenums.Status;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -22,6 +24,8 @@ public class ProductImageEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String image;
+    @Enumerated(EnumType.STRING)
+    Status status;
     @CreationTimestamp
     LocalDateTime createdAt;
     @UpdateTimestamp

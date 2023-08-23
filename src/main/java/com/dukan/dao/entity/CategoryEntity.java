@@ -33,6 +33,6 @@ public class CategoryEntity {
     @UpdateTimestamp
     LocalDateTime updatedAt;
     @JsonBackReference
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+    @OneToMany(cascade = {CascadeType.ALL},mappedBy = "category",orphanRemoval = false)
     List<ProductEntity> products;
 }

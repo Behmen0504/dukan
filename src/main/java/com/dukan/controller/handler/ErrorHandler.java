@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.sql.SQLException;
+
 
 @RestControllerAdvice
 @Slf4j
@@ -21,12 +23,20 @@ public class ErrorHandler {
         return new ExceptionDTO(e.getMessage());
     }
 
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    ExceptionDTO handle(Exception exception){
-        log.error("ActionLog.handle.error Exception handled");
-        return new ExceptionDTO("UNEXPECTED_ERROR");
+
+    @ExceptionHandler(SQLException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    ExceptionDTO handle(SQLException e){
+        log.error("ActionLog.handle.error SqlException handled");
+        return new ExceptionDTO(e.getMessage());
     }
+
+//    @ExceptionHandler(Exception.class)
+//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+//    ExceptionDTO handle(Exception exception){
+//        log.error("ActionLog.handle.error Exception handled");
+//        return new ExceptionDTO("UNEXPECTED_ERROR");
+//    }
 
 //    @ExceptionHandler(UsernameNotFoundException.class)
 //    @ResponseStatus(HttpStatus.NOT_FOUND)

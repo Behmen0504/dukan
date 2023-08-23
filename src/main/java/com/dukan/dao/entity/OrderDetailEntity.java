@@ -29,10 +29,9 @@ public class OrderDetailEntity {
     @JoinColumn(name = "order_id")
     OrderEntity orderr;
 
-    @JsonManagedReference
-    @ManyToOne(cascade = {CascadeType.MERGE})
-    @JoinColumn(name = "user_id")
-    UserEntity user;
-
+//    @JsonManagedReference
+//    @ManyToOne(cascade = {CascadeType.MERGE})
+//    @JoinColumn(name = "user_id")
+//    UserEntity user;
 
 }

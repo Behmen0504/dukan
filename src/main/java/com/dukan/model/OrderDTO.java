@@ -21,7 +21,5 @@ public class OrderDTO {
     Status status;
     ProductDTO product;
 
-    UserDTO user;
-
     List<OrderDetailDTO> orderDetails;
 }

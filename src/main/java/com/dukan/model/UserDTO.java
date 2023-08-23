@@ -34,7 +34,4 @@ public class UserDTO {
     List<FavoriteDTO> favorites;
 
     List<OrderDTO> orders;
-
-    List<CommentDTO> comments;
-
 }

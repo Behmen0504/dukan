@@ -1,12 +1,15 @@
 package com.dukan.service;
 
 import com.dukan.dao.entity.CategoryEntity;
+import com.dukan.dao.entity.ProductEntity;
 import com.dukan.dao.repository.CategoryRepository;
+import com.dukan.dao.repository.ProductRepository;
 import com.dukan.mapper.CategoryMapper;
 import com.dukan.model.CategoryDTO;
 import com.dukan.model.exception.NotFoundException;
 import com.dukan.model.requests.CategoryRequestDTO;
 import com.dukan.myenums.Status;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CategoryService {
     private final CategoryRepository categoryRepository;
+    private final ProductRepository productRepository;
 
     public List<CategoryDTO> getCategories() {
         log.info("ActionLog.getCategories start");
@@ -28,7 +32,7 @@ public class CategoryService {
 
     public CategoryDTO getCategory(Long id) {
         log.info("ActionLog.getCategory start");
-        CategoryDTO categoryDTO = CategoryMapper.INSTANCE.mapEntityToDto(categoryRepository.findById(id).get());
+        CategoryDTO categoryDTO = CategoryMapper.INSTANCE.mapEntityToDto(categoryRepository.findCategoryEntityByIdAndStatus(id,Status.ENABLE));
         log.info("ActionLog.getCategory end");
         return categoryDTO;
     }
@@ -45,15 +49,22 @@ public class CategoryService {
 //        categoryRepository.save(categoryEntity);
         log.info("ActionLog.updateCategory end");
     }
+
+
+    @Transactional
     public void deleteCategory(Long id) {
         log.info("ActionLog.deleteCategory start");
-        categoryRepository.findById(id).orElseThrow(
+        CategoryEntity categoryEntity = categoryRepository.findById(id).orElseThrow(
                 () -> {
                     log.error("ActionLog.deleteCategory.error category not found with id: {}", id);
                     throw new NotFoundException("CATEGORY_NOT_FOUND");
                 }
         );
+        List<ProductEntity> productEntities = productRepository.getProductEntitiesByCategory_Id(id);
+        productEntities.forEach(productEntity -> productEntity.setStatus(Status.DISABLE));
+        productRepository.saveAll(productEntities);
+        categoryEntity.setStatus(Status.DISABLE);
+        categoryRepository.save(categoryEntity);
         log.info("ActionLog.deleteCategory end");
-        categoryRepository.deleteById(id);
     }
 }

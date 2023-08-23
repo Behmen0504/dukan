@@ -1,6 +1,7 @@
 package com.dukan.model.requests;
 
 
+import com.dukan.myenums.Status;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -14,4 +15,5 @@ import lombok.experimental.FieldDefaults;
 public class ProductImageRequestDTO {
     String image;
     Long productId;
+    Status status = Status.ENABLE;
 }

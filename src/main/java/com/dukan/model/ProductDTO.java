@@ -17,15 +17,13 @@ public class ProductDTO {
     String name;
 
     Status status;
-    Boolean stock = true;
+    Boolean stock;
     String stockCode;
     String Description;
     Double price;
     Integer sort;
     CategoryEntity category;
     List<ProductImageDTO> productImages;
-    List<FavoriteDTO> favorites;
-    List<OrderDTO> orders;
     List<CommentDTO> comments;
 
 }

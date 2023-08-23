@@ -2,11 +2,9 @@ package com.dukan.mapper;
 
 import com.dukan.dao.entity.ProductEntity;
 import com.dukan.dao.entity.ProductImageEntity;
-import com.dukan.dao.entity.QuestionEntity;
+import com.dukan.model.ProductDTO;
 import com.dukan.model.ProductImageDTO;
-import com.dukan.model.QuestionDTO;
 import com.dukan.model.requests.ProductImageRequestDTO;
-import com.dukan.model.requests.QuestionRequestDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -28,11 +26,12 @@ public abstract class ProductImageMapper {
 
 
     protected ProductEntity createProductEntity(Long id) {
-        if(id == null) return null;
+        if (id == null) return null;
         return ProductEntity.builder().id(id).build();
     }
 
-    public List<ProductImageDTO> mapEntitiesToDtos(List<ProductImageEntity> productImageEntities){
-        return productImageEntities.stream().map(this::mapEntityToDto).collect(Collectors.toList());
-    }
+        public abstract List<ProductImageDTO> mapEntitiesToDtos(List<ProductImageEntity> productImageEntities);
+//    public List<ProductImageDTO> mapEntitiesToDtos(List<ProductImageEntity> productImageEntities) {
+//        return productImageEntities.stream().map(this::mapEntityToDto).collect(Collectors.toList());
+//    }
 }

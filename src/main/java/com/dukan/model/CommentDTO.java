@@ -1,7 +1,5 @@
 package com.dukan.model;
 
-import com.dukan.dao.entity.ProductEntity;
-import com.dukan.dao.entity.UserEntity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -18,8 +16,6 @@ public class CommentDTO {
     int productRate;
 
     boolean anonymousComment;
-
-    ProductDTO product;
 
     UserDTO user;
 

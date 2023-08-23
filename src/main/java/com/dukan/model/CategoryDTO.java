@@ -27,6 +27,4 @@ public class CategoryDTO {
     Boolean isShowingHomePage;
     Status status;
     Integer sort;
-    List<ProductEntity> products;
-
 }

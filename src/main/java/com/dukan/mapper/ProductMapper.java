@@ -17,10 +17,8 @@ public abstract class ProductMapper {
 
     public abstract ProductDTO mapEntityToDto(ProductEntity productEntity);
 
-    public abstract ProductEntity mapDtoToEntity(ProductDTO productDTO);
-
     @Mappings({
-            @Mapping(source = "requestDto.categoryId", target = "category", qualifiedByName = "createCategoryEntity")
+            @Mapping(source = "requestDto.categoryId", target = "category", qualifiedByName = "createCategoryEntity"),
     })
     public abstract ProductEntity mapProductRequestDtoToEntity(ProductRequestDTO requestDto);
 
@@ -29,7 +27,8 @@ public abstract class ProductMapper {
         return CategoryEntity.builder().id(id).build();
     }
 
-    public List<ProductDTO> mapEntitiesToDtos(List<ProductEntity> productEntities) {
-        return productEntities.stream().map(this::mapEntityToDto).collect(Collectors.toList());
-    }
+    public abstract List<ProductDTO> mapEntitiesToDtos(List<ProductEntity> productEntities);
+//    public List<ProductDTO> mapEntitiesToDtos(List<ProductEntity> productEntities){
+//        return productEntities.stream().map(this::mapEntityToDto).collect(Collectors.toList());
+//    }
 }

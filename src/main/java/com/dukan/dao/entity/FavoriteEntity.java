@@ -1,5 +1,6 @@
 package com.dukan.dao.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -31,7 +32,8 @@ public class FavoriteEntity {
     @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "product_id")
     ProductEntity product;
-    @JsonManagedReference
+
+    @JsonBackReference
     @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "user_id")
     UserEntity user;

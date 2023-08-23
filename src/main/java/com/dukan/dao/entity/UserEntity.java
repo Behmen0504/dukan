@@ -38,11 +38,11 @@ public class UserEntity {
     @UpdateTimestamp
     LocalDateTime updatedAt;
 
-    @JsonBackReference
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     List<FavoriteEntity> favorites;
 
-    @JsonBackReference
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
     List<OrderEntity> orders;
 

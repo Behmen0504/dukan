@@ -1,16 +1,8 @@
 package com.dukan.model;
 
-import com.dukan.dao.entity.ProductEntity;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import com.dukan.myenums.Status;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
-import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -20,6 +12,6 @@ import java.time.LocalDateTime;
 public class ProductImageDTO {
     Long id;
     String image;
-    ProductDTO product;
+    Status status;
 
 }
