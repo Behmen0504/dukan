@@ -28,18 +28,6 @@ databaseChangeLog:
                     foreignKeyName: fk_order_details_to_orders
                     references: orders(id)
               - column:
-                  name: user_id
-                  type: bigint
-                  constraints:
-                    foreignKeyName: fk_order_details_to_users
-                    references: users(id)
-              - column:
-                  name: product_id
-                  type: bigint
-                  constraints:
-                    foreignKeyName: fk_order_details_to_products
-                    references: products(id)
-              - column:
                   name: created_at
                   type: timestamp
                   defaultValue: now()

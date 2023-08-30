@@ -47,10 +47,16 @@ public class SlideImageService {
         log.info("ActionLog.addSlideImage end");
     }
 
-    public void updateSlideImage(Long id, SlideImageRequestDTO requestDTO) {
+    public void updateSlideImage(Long id, SlideImageRequestDTO slideImageRequestDTO) {
         log.info("ActionLog.updateSlideImage start");
-        SlideImageEntity slideImageEntity = slideImageRepository.findById(id).get();
-//        newsRepository.save(slideImageEntity);
+        SlideImageEntity slideImageEntity = slideImageRepository.findById(id).orElseThrow(
+                () -> {
+                    log.error("ActionLog.updateSlideImage.error slide image not found with id: {}", id);
+                    throw new NotFoundException("SLIDEIMAGE_NOT_FOUND");
+                }
+        );
+        slideImageEntity.setImage(slideImageRequestDTO.getImage());
+        slideImageRepository.save(slideImageEntity);
         log.info("ActionLog.updateSlideImage end");
     }
 

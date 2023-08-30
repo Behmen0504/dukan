@@ -50,10 +50,13 @@ public class NewsService {
 
     public void updateNews(Long id, NewsRequestDTO requestDTO) {
         log.info("ActionLog.updateNews start");
-        NewsEntity newsEntity = newsRepository.findById(id).get();
+        NewsEntity newsEntity = newsRepository.findById(id).orElseThrow(
+                () -> {
+                    log.error("ActionLog.updateNews.error news not found with id: {}", id);
+                    throw new NotFoundException("NEWS_NOT_FOUND");
+                });
         newsEntity.setTitle(requestDTO.getTitle());
         newsEntity.setImage(requestDTO.getImage());
-//        newsEntity.setStatus(requestDTO.getStatus());
         newsEntity.setDescription(requestDTO.getDescription());
         newsRepository.save(newsEntity);
         log.info("ActionLog.updateNews end");

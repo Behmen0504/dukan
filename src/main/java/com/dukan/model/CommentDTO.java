@@ -17,7 +17,8 @@ public class CommentDTO {
 
     boolean anonymousComment;
 
-    UserDTO user;
+//    UserDTO user;
 
     CommentDTO comment;
+
 }

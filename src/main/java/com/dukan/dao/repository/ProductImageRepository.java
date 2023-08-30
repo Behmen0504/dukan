@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface ProductImageRepository extends JpaRepository<ProductImageEntity, Long> {
+//    @EntityGraph("Product.productImages")
     List<ProductImageEntity> getProductImageEntitiesByProduct_Id(Long id);
 }

@@ -28,7 +28,4 @@ public abstract class ProductMapper {
     }
 
     public abstract List<ProductDTO> mapEntitiesToDtos(List<ProductEntity> productEntities);
-//    public List<ProductDTO> mapEntitiesToDtos(List<ProductEntity> productEntities){
-//        return productEntities.stream().map(this::mapEntityToDto).collect(Collectors.toList());
-//    }
 }

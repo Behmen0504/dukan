@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,4 +21,5 @@ public class ProductRequestDTO {
     Double price;
     Integer sort;
     Long categoryId;
+//    List<Long> productImageIds;
 }

@@ -1,7 +1,5 @@
 package com.dukan.model;
 
-import com.dukan.dao.entity.OrderEntity;
-import com.dukan.dao.entity.UserEntity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 

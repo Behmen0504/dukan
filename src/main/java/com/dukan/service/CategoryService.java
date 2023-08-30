@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -32,8 +33,8 @@ public class CategoryService {
 
     public CategoryDTO getCategory(Long id) {
         log.info("ActionLog.getCategory start");
-        var category = categoryRepository.findCategoryEntityByIdAndStatus(id,Status.ENABLE);
-        if (category == null){
+        var category = categoryRepository.findCategoryEntityByIdAndStatus(id, Status.ENABLE);
+        if (category == null) {
             log.error("ActionLog.getCategory.error category not found with id: {}", id);
             throw new NotFoundException("CATEGORY_NOT_FOUND");
         }
@@ -42,6 +43,7 @@ public class CategoryService {
         log.info("ActionLog.getCategory end");
         return categoryDTO;
     }
+
     public void addCategory(CategoryRequestDTO requestDTO) {
         log.info("ActionLog.addCategory start");
         CategoryEntity categoryEntity = CategoryMapper.INSTANCE.mapCategoryRequestDtoToEntity(requestDTO);
@@ -51,8 +53,23 @@ public class CategoryService {
 
     public void updateCategory(Long id, CategoryRequestDTO categoryRequestDTO) {
         log.info("ActionLog.updateCategory start");
-        CategoryEntity categoryEntity = categoryRepository.findById(id).get();
-//        categoryRepository.save(categoryEntity);
+        var category = categoryRepository.findById(id).orElseThrow(() -> {
+            log.error("ActionLog.getCategory.error category not found with id: {}", id);
+            throw new NotFoundException("CATEGORY_NOT_FOUND");
+        });
+        category.setName(categoryRequestDTO.getName());
+        category.setIcon(categoryRequestDTO.getIcon());
+        category.setIsShowingHomePage(categoryRequestDTO.getIsShowingHomePage());
+        category.setStatus(categoryRequestDTO.getStatus());
+        category.setSort(categoryRequestDTO.getSort());
+
+        if (categoryRequestDTO.getStatus() == null || categoryRequestDTO.getStatus() == Status.ENABLE) {
+            List<ProductEntity> productEntities = productRepository.getProductEntitiesByCategory_Id(id);
+            productEntities.forEach(productEntity -> productEntity.setStatus(Status.ENABLE));
+            productRepository.saveAll(productEntities);
+        }
+
+        categoryRepository.save(category);
         log.info("ActionLog.updateCategory end");
     }
 
@@ -60,17 +77,16 @@ public class CategoryService {
     @Transactional
     public void deleteCategory(Long id) {
         log.info("ActionLog.deleteCategory start");
-        CategoryEntity categoryEntity = categoryRepository.findById(id).orElseThrow(
-                () -> {
-                    log.error("ActionLog.deleteCategory.error category not found with id: {}", id);
-                    throw new NotFoundException("CATEGORY_NOT_FOUND");
-                }
-        );
+        var category = categoryRepository.findCategoryEntityByIdAndStatus(id, Status.ENABLE);
+        if (category == null) {
+            log.error("ActionLog.deleteCategory.error category not found with id: {}", id);
+            throw new NotFoundException("CATEGORY_NOT_FOUND");
+        }
         List<ProductEntity> productEntities = productRepository.getProductEntitiesByCategory_Id(id);
         productEntities.forEach(productEntity -> productEntity.setStatus(Status.DISABLE));
         productRepository.saveAll(productEntities);
-        categoryEntity.setStatus(Status.DISABLE);
-        categoryRepository.save(categoryEntity);
+        category.setStatus(Status.DISABLE);
+        categoryRepository.save(category);
         log.info("ActionLog.deleteCategory end");
     }
 }

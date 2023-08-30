@@ -2,7 +2,6 @@ package com.dukan.dao.entity;
 
 import com.dukan.myenums.Status;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;

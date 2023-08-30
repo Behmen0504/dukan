@@ -3,6 +3,7 @@ package com.dukan.service;
 import com.dukan.dao.entity.OrderEntity;
 import com.dukan.dao.entity.ProductEntity;
 import com.dukan.dao.entity.ProductImageEntity;
+import com.dukan.dao.repository.CategoryRepository;
 import com.dukan.dao.repository.OrderRepository;
 import com.dukan.dao.repository.ProductImageRepository;
 import com.dukan.dao.repository.ProductRepository;
@@ -23,19 +24,21 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
     private final ProductImageRepository productImageRepository;
     private final OrderRepository orderRepository;
 
     public List<ProductDTO> getProducts() {
         log.info("ActionLog.getProducts start");
-        List<ProductDTO> productDTOS = ProductMapper.INSTANCE.mapEntitiesToDtos(productRepository.getProductEntitiesByStatus(Status.ENABLE));
+        List<ProductDTO> productDTOS = ProductMapper.INSTANCE
+                .mapEntitiesToDtos(productRepository.getProductEntitiesByStatus(Status.ENABLE));
         log.info("ActionLog.getProducts end");
         return productDTOS;
     }
 
     public ProductDTO getProduct(Long id) {
         log.info("ActionLog.getProduct start");
-        var product = productRepository.findProductEntityByIdAndStatus(id,Status.ENABLE);
+        var product = productRepository.findProductEntityByIdAndStatus(id, Status.ENABLE);
         if (product == null) {
             log.error("ActionLog.getProduct.error product not found with id: {}", id);
             throw new NotFoundException("PRODUCT_NOT_FOUND");
@@ -52,10 +55,29 @@ public class ProductService {
         log.info("ActionLog.addProduct end");
     }
 
-    public void updateProduct(Long id, ProductDTO productDTO) {
+    public void updateProduct(Long id, ProductRequestDTO productRequestDTO) {
         log.info("ActionLog.updateProduct start");
-        ProductEntity productEntity = productRepository.findById(id).get();
-//        newsRepository.save(newsEntity);
+        var category = categoryRepository
+                .findById(productRequestDTO.getCategoryId()).orElseThrow(() -> {
+                    log.error("ActionLog.updateProduct.error category not found with id: {}", id);
+                    throw new NotFoundException("CATEGORY_NOT_FOUND");
+                });
+        ProductEntity productEntity = productRepository
+                .findById(id)
+                .orElseThrow(() -> {
+                    log.error("ActionLog.updateProduct.error product not found with id: {}", id);
+                    throw new NotFoundException("PRODUCT_NOT_FOUND");
+                });
+        productEntity.setName(productRequestDTO.getName());
+        productEntity.setStatus(productRequestDTO.getStatus());
+        productEntity.setStock(productRequestDTO.getStock());
+        productEntity.setStockCode(productRequestDTO.getStockCode());
+        productEntity.setDescription(productRequestDTO.getDescription());
+        productEntity.setPrice(productRequestDTO.getPrice());
+        productEntity.setSort(productRequestDTO.getSort());
+        productEntity.setCategory(category);
+
+        productRepository.save(productEntity);
         log.info("ActionLog.updateProduct end");
     }
 
@@ -69,11 +91,11 @@ public class ProductService {
         }
         List<ProductImageEntity> productImageEntities = productImageRepository.getProductImageEntitiesByProduct_Id(id);
         List<OrderEntity> orderEntities = orderRepository.getOrderEntitiesByProduct_Id(id);
-        if(productImageEntities != null){
+        if (productImageEntities != null) {
             productImageEntities.forEach(productImageEntity -> productImageEntity.setStatus(Status.DISABLE));
             productImageRepository.saveAll(productImageEntities);
         }
-        if (orderEntities != null){
+        if (orderEntities != null) {
             orderEntities.forEach(orderEntity -> orderEntity.setStatus(Status.DISABLE));
             orderRepository.saveAll(orderEntities);
         }

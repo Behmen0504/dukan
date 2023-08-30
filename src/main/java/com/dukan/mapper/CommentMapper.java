@@ -2,16 +2,13 @@ package com.dukan.mapper;
 
 import com.dukan.dao.entity.*;
 import com.dukan.model.CommentDTO;
-import com.dukan.model.ProductDTO;
 import com.dukan.model.requests.CommentRequestDTO;
-import com.dukan.model.requests.ProductRequestDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Mapper
 public abstract class CommentMapper {
@@ -24,7 +21,7 @@ public abstract class CommentMapper {
     @Mappings({
             @Mapping(source = "requestDto.productId", target = "product", qualifiedByName = "createProductEntity"),
             @Mapping(source = "requestDto.userId", target = "user", qualifiedByName = "createUserEntity"),
-            @Mapping(source = "requestDto.commentId", target = "comment", qualifiedByName = "createCommentEntity")
+            @Mapping(source = "requestDto.commentId", target = "comment", qualifiedByName = "createCommentEntity"),
     })
     public abstract CommentEntity mapCommentRequestDtoToEntity(CommentRequestDTO requestDto);
 
@@ -40,7 +37,5 @@ public abstract class CommentMapper {
         if(id == null) return null;
         return CommentEntity.builder().id(id).build();
     }
-    public List<CommentDTO> mapEntitiesToDtos(List<CommentEntity> commentEntities) {
-        return commentEntities.stream().map(this::mapEntityToDto).collect(Collectors.toList());
-    }
+    public abstract List<CommentDTO> mapEntitiesToDtos(List<CommentEntity> commentEntities);
 }

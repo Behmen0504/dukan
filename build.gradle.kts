@@ -19,6 +19,7 @@ repositories {
 }
 
 dependencies {
+	implementation("javax.servlet", "javax.servlet-api", "4.0.1")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-web")
@@ -32,6 +33,10 @@ dependencies {
 	implementation("org.mapstruct:mapstruct-jdk8:1.3.0.Final")
 	annotationProcessor("org.mapstruct:mapstruct-jdk8:1.5.3.Final")
 	annotationProcessor("org.mapstruct:mapstruct-processor:1.3.0.Final")
+
+
+	//swagger
+	implementation("io.springfox:springfox-boot-starter:3.0.0")
 }
 
 tasks.withType<Test> {

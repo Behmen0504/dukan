@@ -1,6 +1,6 @@
 package com.dukan.dao.entity;
 
-import com.dukan.myenums.Status;
+
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;

@@ -5,7 +5,6 @@ import com.dukan.dao.entity.ProductEntity;
 import com.dukan.dao.entity.UserEntity;
 import com.dukan.model.FavoriteDTO;
 import com.dukan.model.requests.FavoriteRequestDTO;
-import com.dukan.model.requests.ProductRequestDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

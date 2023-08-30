@@ -19,6 +19,11 @@ import java.util.List;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "users")
+@NamedEntityGraphs({
+        @NamedEntityGraph(name = "fullUser", attributeNodes = {
+                @NamedAttributeNode("orders")
+        })
+})
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

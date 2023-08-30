@@ -1,6 +1,5 @@
 package com.dukan.model;
 
-import com.dukan.myenums.Status;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -15,5 +14,4 @@ public class NewsDTO {
     String title;
     String image;
     String description;
-//    Status status;
 }

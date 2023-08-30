@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity,Long> {
-    @EntityGraph("Product.category")
+    @EntityGraph("fullProduct")
     List<ProductEntity> getProductEntitiesByStatus(Status status);
     List<ProductEntity> getProductEntitiesByCategory_Id(Long id);
     ProductEntity findProductEntityByIdAndStatus(Long id,Status status);

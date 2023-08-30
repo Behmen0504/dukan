@@ -2,14 +2,12 @@ package com.dukan.dao.entity;
 
 import com.dukan.myenums.Status;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.jpa.repository.EntityGraph;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,10 +19,12 @@ import java.util.List;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "products")
-@NamedEntityGraph(
-        name = "Product.category",
-        attributeNodes = @NamedAttributeNode("category")
-)
+@NamedEntityGraphs({
+        @NamedEntityGraph(name = "fullProduct", attributeNodes = {
+                @NamedAttributeNode("category"),
+                @NamedAttributeNode("productImages")
+        })
+})
 public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,12 +44,12 @@ public class ProductEntity {
     LocalDateTime updatedAt;
 
     @JsonManagedReference
-    @ManyToOne(cascade = {CascadeType.MERGE},fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "category_id")
     CategoryEntity category;
 
     @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "product")
     List<ProductImageEntity> productImages;
 
     @JsonBackReference
@@ -61,6 +61,6 @@ public class ProductEntity {
     List<OrderEntity> orders;
 
     @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "product")
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "product")
     List<CommentEntity> comments;
 }

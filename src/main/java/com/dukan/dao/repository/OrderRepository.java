@@ -1,6 +1,5 @@
 package com.dukan.dao.repository;
 
-import com.dukan.dao.entity.CategoryEntity;
 import com.dukan.dao.entity.OrderEntity;
 import com.dukan.myenums.Status;
 import org.springframework.data.jpa.repository.JpaRepository;

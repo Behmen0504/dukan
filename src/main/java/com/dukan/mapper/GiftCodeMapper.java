@@ -1,9 +1,7 @@
 package com.dukan.mapper;
 
 import com.dukan.dao.entity.GiftCodeEntity;
-import com.dukan.dao.entity.NewsEntity;
 import com.dukan.model.GiftCodeDTO;
-import com.dukan.model.NewsDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

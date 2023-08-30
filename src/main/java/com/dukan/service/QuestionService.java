@@ -49,8 +49,14 @@ public class QuestionService {
 
     public void updateQuestion(Long id, QuestionRequestDTO questionRequestDTO) {
         log.info("ActionLog.updateQuestion start");
-        QuestionEntity questionEntity = questionRepository.findById(id).get();
-//        newsRepository.save(newsEntity);
+        QuestionEntity questionEntity = questionRepository.findById(id).orElseThrow(
+                () -> {
+                    log.error("ActionLog.updateQuestion.error question not found with id: {}", id);
+                    throw new NotFoundException("QUESTION_NOT_FOUND");
+                }
+        );
+        questionEntity.setTitle(questionRequestDTO.getTitle());
+        questionRepository.save(questionEntity);
         log.info("ActionLog.updateQuestion end");
     }
 

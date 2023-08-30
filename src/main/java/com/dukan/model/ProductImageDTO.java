@@ -13,5 +13,4 @@ public class ProductImageDTO {
     Long id;
     String image;
     Status status;
-
 }

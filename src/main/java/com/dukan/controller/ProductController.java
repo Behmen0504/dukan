@@ -23,6 +23,8 @@ public class ProductController {
     public List<ProductDTO> getProducts(){
         return productService.getProducts();
     }
+
+
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ProductDTO getProduct(@PathVariable Long id){
@@ -37,8 +39,8 @@ public class ProductController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void updateProduct(@PathVariable Long id,@RequestBody ProductDTO productDTO){
-        productService.updateProduct(id,productDTO);
+    public void updateProduct(@PathVariable Long id,@RequestBody ProductRequestDTO productRequestDTO){
+        productService.updateProduct(id,productRequestDTO);
     }
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

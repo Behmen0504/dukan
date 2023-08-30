@@ -49,8 +49,18 @@ public class BlogService {
 
     public void updateBlog(Long id, BlogRequestDTO blogDTO) {
         log.info("ActionLog.updateBlog start");
-        BlogEntity blogEntity = blogRepository.findById(id).get();
-//        newsRepository.save(newsEntity);
+        var blog = blogRepository
+                .findById(id)
+                .orElseThrow(
+                        () -> {
+                            log.error("ActionLog.updateBlog.error blog not found with id: {}", id);
+                            throw new NotFoundException("BLOG_NOT_FOUND");
+                        }
+                );
+        blog.setTitle(blogDTO.getTitle());
+        blog.setImage(blogDTO.getImage());
+        blog.setDescription(blogDTO.getDescription());
+        blogRepository.save(blog);
         log.info("ActionLog.updateBlog end");
     }
 

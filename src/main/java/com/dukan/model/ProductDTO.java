@@ -1,6 +1,5 @@
 package com.dukan.model;
 
-import com.dukan.dao.entity.*;
 import com.dukan.myenums.Status;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -22,7 +21,7 @@ public class ProductDTO {
     String Description;
     Double price;
     Integer sort;
-    CategoryEntity category;
+    CategoryDTO category;
     List<ProductImageDTO> productImages;
     List<CommentDTO> comments;
 

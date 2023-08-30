@@ -17,6 +17,11 @@ import java.time.LocalDateTime;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "favorites")
+@NamedEntityGraphs({
+        @NamedEntityGraph(name = "fullFavorite", attributeNodes = {
+                @NamedAttributeNode("product")
+        })
+})
 public class FavoriteEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
